@@ -16,3 +16,7 @@ cabal.sandbox.config
 *.hp
 *.eventlog
 .stack-work/
+
+# The big file we are using for testing
+big-example-file
+parsed-example-file

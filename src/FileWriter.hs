@@ -1,12 +1,8 @@
-module Lib where
+module FileWriter where
 
 import ClassyPrelude.Conduit
 
-exampleFile :: FilePath
-exampleFile = "big-example-file"
-
-totalLines :: Int
-totalLines = 10000000
+import Types (exampleFile, totalLines)
 
 fileProducer :: Monad m => Producer m ByteString
 fileProducer = do
@@ -23,6 +19,3 @@ fileWriter
   => m ()
 fileWriter =
   runResourceT $ fileProducer $$ sinkFile exampleFile
-
-fileParser :: IO ()
-fileParser = undefined
