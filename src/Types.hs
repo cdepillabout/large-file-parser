@@ -1,7 +1,7 @@
 
 module Types where
 
-import ClassyPrelude.Conduit
+import MyPrelude
 
 exampleFile :: FilePath
 exampleFile = "big-example-file"

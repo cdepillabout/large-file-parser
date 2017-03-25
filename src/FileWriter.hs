@@ -1,6 +1,6 @@
 module FileWriter where
 
-import ClassyPrelude.Conduit
+import MyPrelude
 
 import Types (exampleFile, totalLines)
 

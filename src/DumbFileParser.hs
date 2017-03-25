@@ -1,10 +1,13 @@
 module DumbFileParser where
 
-import ClassyPrelude.Conduit
+import MyPrelude
 
 import Text.Parsec.ByteString (Parser)
 
-parserFile :: Parser 
+import Types (FullFile(..))
 
-fileParser :: IO ()
-fileParser = undefined
+parserFile :: Parser FullFile
+parserFile = undefined
+
+dumbFileParser :: IO ()
+dumbFileParser = undefined
