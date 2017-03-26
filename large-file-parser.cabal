@@ -17,6 +17,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     DumbFileParser
                      , FileWriter
+                     , MonadTransFileParser
                      , MyPrelude
                      , StreamingFileParser
                      , Types
@@ -25,6 +26,7 @@ library
                      , classy-prelude-conduit
                      , conduit-combinators
                      , conduit-extra
+                     , mtl
                      , parsec
   default-language:    Haskell2010
   ghc-options:         -Wall -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction
@@ -83,6 +85,22 @@ executable large-file-dumb-parser
 executable large-file-streaming-parser
   hs-source-dirs:      app
   main-is:             StreamingFileParserMain.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , large-file-parser
+  default-language:    Haskell2010
+
+executable large-file-monad-trans-parser
+  hs-source-dirs:      app
+  main-is:             MonadTransFileParserMain.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , large-file-parser
+  default-language:    Haskell2010
+
+executable large-file-scratch-parser
+  hs-source-dirs:      app
+  main-is:             ScratchFileParserMain.hs
   ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , large-file-parser
