@@ -181,39 +181,6 @@ unconsStr [] = pure Nothing
 unconsStr (t:ts) = pure $ Just (t, ts)
 {-# INLINE unconsStr #-}
 
--- tokenPrimEx :: (Stream s m t)
---             => (t -> String)
---             -> (SourcePos -> t -> s -> SourcePos)
---             -> Maybe (SourcePos -> t -> s -> u -> u)
---             -> (t -> Maybe a)
---             -> ParsecT s u m a
--- {-# INLINE tokenPrimEx #-}
--- tokenPrimEx showToken nextpos Nothing test
---   = ParsecT $ \(State input pos user) cok cerr eok eerr -> do
---       r <- uncons input
---       case r of
---         Nothing -> eerr $ unexpectError "" pos
---         Just (c,cs)
---          -> case test c of
---               Just x -> let newpos = nextpos pos c cs
---                             newstate = State cs newpos user
---                         in seq newpos $ seq newstate $
---                            cok x newstate (newErrorUnknown newpos)
---               Nothing -> eerr $ unexpectError (showToken c) pos
--- tokenPrimEx showToken nextpos (Just nextState) test
---   = ParsecT $ \(State input pos user) cok cerr eok eerr -> do
---       r <- uncons input
---       case r of
---         Nothing -> eerr $ unexpectError "" pos
---         Just (c,cs)
---          -> case test c of
---               Just x -> let newpos = nextpos pos c cs
---                             newUser = nextState pos c cs user
---                             newstate = State cs newpos newUser
---                         in seq newpos $ seq newstate $
---                            cok x newstate $ newErrorUnknown newpos
---               Nothing -> eerr $ unexpectError (showToken c) pos
-
 tokenPrimEx
   :: Monad m
   => (Char -> Maybe a) -> ParsecT m a
@@ -228,13 +195,6 @@ tokenPrimEx test =
             cok x cs $ ParseError "new unknown error in tokenPrimEx"
           Nothing -> eerr $ ParseError "unexpected err weird char in tokenPrimEx"
 {-# INLINE tokenPrimEx #-}
-
--- instance (MonadCont m) => MonadCont (ParsecT s u m) where
---     callCC f = mkPT $ \s ->
---           callCC $ \c ->
---           runParsecT (f (\a -> mkPT $ \s' -> c (pack s' a))) s
-
---      where pack s a= Empty $ return (Ok a s (unknownError s))
 
 scratchFileParser :: IO ()
 scratchFileParser = do
