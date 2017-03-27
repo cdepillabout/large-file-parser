@@ -31,7 +31,8 @@ library
                      , parsec
   default-language:    Haskell2010
   ghc-options:         -Wall -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -fwarn-monomorphism-restriction
-  default-extensions:  ConstraintKinds
+  default-extensions:  ApplicativeDo
+                     , ConstraintKinds
                      , DataKinds
                      , DefaultSignatures
                      , DeriveDataTypeable
