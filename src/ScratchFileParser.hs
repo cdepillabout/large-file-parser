@@ -279,17 +279,14 @@ tokens tts@(tok:toks) = ParsecT f
     {-# INLINE f #-}
 {-# INLINE tokens #-}
 
-many :: ParsecT m a -> ParsecT m [a]
-many p = do
-  xs <- manyAccum (:) p
-  return (reverse xs)
-
 skipMany :: ParsecT m a -> ParsecT m ()
 skipMany p = do
   void $ manyAccum (\_ _ -> []) p
-  return ()
+  pure ()
 
-manyAccum :: forall a m. (a -> [a] -> [a]) -> ParsecT m a -> ParsecT m [a]
+manyAccum
+  :: forall a m.
+     (a -> [a] -> [a]) -> ParsecT m a -> ParsecT m [a]
 manyAccum acc p = ParsecT f
   where
     f
@@ -311,8 +308,78 @@ manyAccum acc p = ParsecT f
       in unParser p s (walk []) cerr manyErr (\e -> eok [] s e)
     {-# INLINE f #-}
 
+manyAccumLength
+  :: forall a m.  (a -> [a] -> [a]) -> ParsecT m a -> ParsecT m (Int, [a])
+manyAccumLength acc p = ParsecT f
+  where
+    f
+      :: forall b.
+         String
+      -> ((Int, [a]) -> String -> ParseError -> m b) -- consumed ok
+      -> (ParseError -> m b)                  -- consumed err
+      -> ((Int, [a]) -> String -> ParseError -> m b) -- empty ok
+      -> (ParseError -> m b)                  -- empty err
+      -> m b
+    f s cok cerr eok _ =
+      let walk :: (Int, [a]) -> a -> String -> ParseError -> m b
+          walk (!i, xs) x s' _ =
+            unParser p s'
+              (walk (i + 1, acc x xs))  -- consumed-ok
+              cerr                        -- consumed-err
+              manyErr                     -- empty-ok
+              (\e -> cok (i + 1, acc x xs) s' e) -- empty-err
+      in unParser p s (walk (0, [] :: [a])) cerr manyErr (\e -> eok (0, []) s e)
+    {-# INLINE f #-}
+
+manyNoAccumLength :: forall a m. ParsecT m a -> ParsecT m Int
+manyNoAccumLength p = ParsecT f
+  where
+    f
+      :: forall b.
+         String
+      -> (Int -> String -> ParseError -> m b) -- consumed ok
+      -> (ParseError -> m b)                  -- consumed err
+      -> (Int -> String -> ParseError -> m b) -- empty ok
+      -> (ParseError -> m b)                  -- empty err
+      -> m b
+    f s cok cerr eok _ =
+      let walk :: Int -> a -> String -> ParseError -> m b
+          walk !i _ s' _ =
+            unParser p s'
+              (walk $! i + 1)             -- consumed-ok
+              cerr                        -- consumed-err
+              manyErr                     -- empty-ok
+              (\e -> cok (i + 1) s' e)    -- empty-err
+      in unParser p s (walk 0) cerr manyErr (\e -> eok 0 s e)
+    {-# INLINE f #-}
+
+many :: ParsecT m a -> ParsecT m [a]
+many p = do
+  xs <- manyAccum (:) p
+  pure (reverse xs)
+
+manyLength :: ParsecT m a -> ParsecT m (Int, [a])
+manyLength p = do
+  (i, xs) <- manyAccumLength (:) p
+  pure (i, reverse xs)
+
+manyLength_ :: ParsecT m a -> ParsecT m Int
+manyLength_ = manyNoAccumLength
+
 many1 :: Applicative m => ParsecT m a -> ParsecT m [a]
 many1 p = (:) <$> p <*> many p
+
+many1Length :: Applicative m => ParsecT m a -> ParsecT m (Int, [a])
+many1Length p = do
+  pRes <- p
+  (i, psRes) <- manyLength p
+  pure (i + 1, pRes : psRes)
+
+many1Length_ :: Applicative m => ParsecT m a -> ParsecT m Int
+many1Length_ p = do
+  void p
+  i <- manyLength_ p
+  pure $! i + 1
 
 char :: Applicative m => Char -> ParsecT m Char
 char c = satisfy (== c)
@@ -331,12 +398,7 @@ digit :: Applicative m => ParsecT m Char
 digit = satisfy isDigit
 
 int :: forall m. Applicative m => ParsecT m Int
--- int = do
---   maybeInt <- readMay <$> many1 digit
---   case maybeInt of
---     Just i -> pure i
---     Nothing -> throwError $ ParseError "int failed"
-int = ParsecT $ f
+int = ParsecT f
   where
     f
       :: forall b.
@@ -355,6 +417,8 @@ int = ParsecT $ f
           case readMay digitString of
             Just i -> cok i input parseErr
             Nothing -> cerr $ ParseError "unknown error in lala"
+        {-# INLINE lala #-}
+    {-# INLINE f #-}
 
 
 string :: Applicative m => String -> ParsecT m String
@@ -372,15 +436,20 @@ parserDataLine = do
   void $ string "01 "
   quote <- pack . encodeUtf8 <$> many1 letter
   void $ char ' '
-  -- price <- int
-  let price = undefined
+  price <- int
+  -- TODO: Print out the data line so it can be written to another file.
   pure $ DL {..}
+
+parserFinalLine :: ParsecT IO FinalLine
+parserFinalLine = string "99 final " *> fmap FL int
 
 parseFile :: ParsecT IO ()
 parseFile = do
   void $ parserHeaderLine <* newline
-  void $ parserDataLine <* newline
-
+  len <- many1Length_ $ parserDataLine <* newline
+  (FL finalLen) <- parserFinalLine <* newline
+  when (len /= finalLen) $
+    fail "input lines are not equal to final line length"
 
 manyErr :: forall a. a
 manyErr = error "Text.ParserCombinators.Parsec.Prim.many: combinator 'many' is applied to a parser that accepts an empty string."
