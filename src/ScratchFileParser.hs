@@ -408,9 +408,9 @@ int = ParsecT f
       -> (Int -> String -> ParseError -> m b) -- empty ok
       -> (ParseError -> m b)                  -- empty err
       -> m b
-    f s cok cerr eok eerr =
-      -- TODO: dunno what this undefined should be
-      unParser (many1 digit) s lala cerr undefined eerr
+    f s cok cerr _ eerr =
+      -- TODO: dunno if lala is correct for eok here
+      unParser (many1 digit) s lala cerr lala eerr
       where
         lala :: String -> String -> ParseError -> m b
         lala digitString input parseErr =
@@ -463,5 +463,5 @@ scratchFileParser = do
       Consumed mReply -> mReply
       Empty mReply -> mReply
   case reply of
-    Ok () resultString _ -> putStrLn "Successful parse."
+    Ok () _ _ -> putStrLn "Successful parse."
     Error parseErr -> print parseErr
