@@ -1,0 +1,116 @@
+In a recent question, I asked about the following
+[parsec](https://hackage.haskell.org/package/parsec) code:
+
+    manyLength
+      :: forall s u m a. ParsecT s u m a -> ParsecT s u m Int
+    manyLength p = go 0
+      where
+        go :: Int -> ParsecT s u m Int
+        go !i = (p *> go (i + 1)) <|> pure i
+
+This is a function similar to `many`.  However, instead of returning `[a]`, it
+returns the number of times it was able to successfully run `p`.
+
+This works well, except for one problem.  It doesn't run in constant heap
+space.
+
+In the linked question, [Li-yao
+Xia](http://stackoverflow.com/a/43094097/3040129) gives an alternative way of
+writing `manyLength` that only uses constant heap space:
+
+    manyLengthConstantHeap
+      :: forall s u m a. ParsecT s u m a -> ParsecT s u m Int
+    manyLengthConstantHeap p = go 0
+      where
+        go :: Int -> ParsecT s u m Int
+        go !i =
+          ((p *> pure True) <|> pure False) >>=
+            \success -> if success then go (i+1) else pure i
+
+This is a significant improvement, but I don't understand why
+`manyLengthConstantHeap` uses constant heap space, while `manyLength` original doesn't.
+
+If you inline `(<|>)` in `manyLength`, it looks somewhat like this:
+
+    manyLengthInline
+      :: forall s u m a. Monad m => ParsecT s u m a -> ParsecT s u m Int
+    manyLengthInline p = go 0
+      where
+        go :: Int -> ParsecT s u m Int
+        go !i =
+          ParsecT $ \s cok cerr eok eerr ->
+            let meerr :: ParserError -> m b
+                meerr err =
+                  let neok :: Int -> State s u -> ParserError -> m b
+                      neok y s' err' = eok y s' (mergeError err err')
+                      neerr :: ParserError -> m b
+                      neerr err' = eerr $ mergeError err err'
+                  in unParser (pure i) s cok cerr neok neerr
+            in unParser (p *> go (i + 1)) s cok cerr eok meerr
+
+If you inline `(>>=)` in `manyLengthConstantHeap`, it looks somewhat like this:
+
+    manyLengthConstantHeapInline
+      :: forall s u m a. Monad m => ParsecT s u m a -> ParsecT s u m Int
+    manyLengthConstantHeapInline p = go 0
+      where
+        go :: Int -> ParsecT s u m Int
+        go !i =
+          ParsecT $ \s cok cerr eok eerr ->
+            let mcok :: Bool -> State s u -> ParserError -> m b
+                mcok success s' err =
+                    let peok :: Int -> State s u -> ParserError -> m b
+                        peok int s'' err' = cok int s'' (mergeError err err')
+                        peerr :: ParserError -> m b
+                        peerr err' = cerr (mergeError err err')
+                    in unParser
+                        (if success then go (i + 1) else pure i)
+                        s'
+                        cok
+                        cerr
+                        peok
+                        peerr
+                meok :: Bool -> State s u -> ParserError -> m b
+                meok success s' err =
+                    let peok :: Int -> State s u -> ParserError -> m b
+                        peok int s'' err' = eok int s'' (mergeError err err')
+                        peerr :: ParserError -> m b
+                        peerr err' = eerr (mergeError err err')
+                    in unParser
+                        (if success then go (i + 1) else pure i)
+                        s'
+                        cok
+                        pcerr
+                        peok
+                        peerr
+            in unParser ((p *> pure True) <|> pure False) s mcok cerr meok eerr
+
+Here is the ParsecT constructor for completeness:
+
+    newtype ParsecT s u m a = ParsecT
+      { unParser
+          :: forall b .
+             State s u
+          -> (a -> State s u -> ParseError -> m b) -- consumed ok
+          -> (ParseError -> m b)                   -- consumed err
+          -> (a -> State s u -> ParseError -> m b) -- empty ok
+          -> (ParseError -> m b)                   -- empty err
+          -> m b
+      }
+
+-------------------------------------------
+
+Why does `manyLengthConstantHeap` run with constant heap space, while
+`manyLength` does not?  It doesn't look like the recursive call to `go` is in
+the tail-call position for either `manyLengthConstantHeap` or `manyLength`.
+
+When writing parsec parsers in the future, how can I *know the space
+requirements for a given parser*?  How did Li-yao Xia know that
+`manyLengthConstantHeap` would be okay?
+
+I don't feel like I have any confidence in predicting which parsers will use a
+lot of memory on a large input.
+
+Is there an easy way to figure out whether a given function will be
+tail-recursive in Haskell without running it?  Or better yet, without compiling
+it?

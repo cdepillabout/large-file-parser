@@ -27,7 +27,73 @@ import Types
 -- manyLength p = go 0
 --   where
 --     go :: Int -> Parser Int
---     go i = (p *> go (i + 1)) <|> pure i
+--     go !i = (p *> go (i + 1)) <|> pure i
+
+manyLength :: forall a . Parser a -> Parser Int
+manyLength p = go 0
+  where
+    go :: Int -> Parser Int
+    -- go !i = (p *> go (i + 1)) <|> pure i
+    go !i =
+      (p *> pure True) <|> pure False >>=
+        \success -> if success then go (i+1) else pure i
+
+manyLengthInline :: forall s u m a. Monad m => ParsecT s u m a -> ParsecT s u m Int
+manyLengthInline p = go 0
+  where
+    go :: Int -> ParsecT s u m Int
+    -- go !i =
+    --   (p *> pure True) <|> pure False >>=
+    --     \success -> if success then go (i+1) else pure i
+    -- go !i =
+    --   (>>=)
+    --     ((p *> pure True) <|> pure False)
+    --     (\success -> if success then go (i+1) else pure i)
+    go !i =
+      ParsecT $ \s cok cerr eok eerr ->
+        let mcok :: Bool -> State s u -> ParserError -> m b
+            mcok success s' err =
+                let peok :: Int -> State s u -> ParserError -> m b
+                    peok int s'' err' = cok int s'' (mergeError err err')
+                    peerr :: ParserError -> m b
+                    peerr err' = cerr (mergeError err err')
+                in unParser
+                    (if success then go (i + 1) else pure i)
+                    s'
+                    cok
+                    cerr
+                    peok
+                    peerr
+            meok :: Bool -> State s u -> ParserError -> m b
+            meok success s' err =
+                let peok :: Int -> State s u -> ParserError -> m b
+                    peok int s'' err' = eok int s'' (mergeError err err')
+                    peerr :: ParserError -> m b
+                    peerr err' = eerr (mergeError err err')
+                in unParser
+                    (if success then go (i + 1) else pure i)
+                    s'
+                    cok
+                    pcerr
+                    peok
+                    peerr
+        in unParser ((p *> pure True) <|> pure False) s mcok cerr meok eerr
+
+manyLength :: forall s u m a. Monad m => ParsecT s u m a -> ParsecT s u m Int
+manyLength p = go 0
+  where
+    go :: Int -> ParsecT s u m Int
+    -- go !i = (p *> go (i + 1)) <|> pure i
+    go !i =
+      ParsecT $ \s cok cerr eok eerr ->
+        let meerr :: ParserError -> m b
+            meerr err =
+              let neok :: Int -> State s u -> ParserError -> m b
+                  neok y s' err' = eok y s' (mergeError err err')
+                  neerr :: ParserError -> m b
+                  neerr err' = eerr $ mergeError err err'
+              in unParser (pure i) s cok cerr neok neerr
+        in unParser (p *> go (i + 1)) s cok cerr eok meerr
 
 type Parser = ParsecT String () IO
 
@@ -53,43 +119,43 @@ type Parser = ParsecT String () IO
 --       in unParser p s (walk 0) cerr manyErr (\e -> eok 0 s e)
 --     {-# INLINE f #-}
 
-manyLength :: forall a. Parser a -> Parser Int
-manyLength p = {-# SCC "manyLength" #-} mkPT f
-  where
-    f :: State String () -> IO (Consumed (IO (Reply String () Int)))
-    f parseState = do
-      consumed <- runParsecT p parseState
-      case consumed of
-        Empty ioReply -> do
-          reply <- ioReply
-          case reply of
-            Ok _ _ _ -> manyLengthErr
-            Error parseErr -> pure . Empty . pure $ Ok 0 parseState parseErr
-        Consumed ioReply -> do
-          reply <- ioReply
-          case reply of
-            Ok a newState parseErr -> walk 0 a newState parseErr
-            Error parseErr -> pure . Consumed . pure $ Error parseErr
-      where
-        walk
-          :: Int
-          -> a
-          -> State String ()
-          -> ParseError
-          -> IO (Consumed (IO (Reply String () Int)))
-        walk !i _ parseState' _ = do
-          consumed <- runParsecT p parseState'
-          case consumed of
-            Empty ioReply -> do
-              reply <- ioReply
-              case reply of
-                Ok _ _ _ -> manyLengthErr
-                Error parseErr -> pure . Consumed . pure $ Ok (i + 1) parseState' parseErr
-            Consumed ioReply -> do
-              reply <- ioReply
-              case reply of
-                Ok a newState parseErr -> walk (i + 1) a newState parseErr
-                Error parseErr -> pure . Consumed . pure $ Error parseErr
+-- manyLength :: forall a. Parser a -> Parser Int
+-- manyLength p = {-# SCC "manyLength" #-} mkPT f
+--   where
+--     f :: State String () -> IO (Consumed (IO (Reply String () Int)))
+--     f parseState = do
+--       consumed <- runParsecT p parseState
+--       case consumed of
+--         Empty ioReply -> do
+--           reply <- ioReply
+--           case reply of
+--             Ok _ _ _ -> manyLengthErr
+--             Error parseErr -> pure . Empty . pure $ Ok 0 parseState parseErr
+--         Consumed ioReply -> do
+--           reply <- ioReply
+--           case reply of
+--             Ok a newState parseErr -> walk 0 a newState parseErr
+--             Error parseErr -> pure . Consumed . pure $ Error parseErr
+--       where
+--         walk
+--           :: Int
+--           -> a
+--           -> State String ()
+--           -> ParseError
+--           -> IO (Consumed (IO (Reply String () Int)))
+--         walk !i _ parseState' _ = do
+--           consumed <- runParsecT p parseState'
+--           case consumed of
+--             Empty ioReply -> do
+--               reply <- ioReply
+--               case reply of
+--                 Ok _ _ _ -> manyLengthErr
+--                 Error parseErr -> pure . Consumed . pure $ Ok (i + 1) parseState' parseErr
+--             Consumed ioReply -> do
+--               reply <- ioReply
+--               case reply of
+--                 Ok a newState parseErr -> walk (i + 1) a newState parseErr
+--                 Error parseErr -> pure . Consumed . pure $ Error parseErr
 
 manyLengthErr :: Monad m => m a
 manyLengthErr = fail "manyLength can't be used on a parser that accepts empty input"

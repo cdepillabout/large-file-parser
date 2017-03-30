@@ -1,0 +1,2434 @@
+
+==================== Tidy Core ====================
+2017-03-30 04:04:27.985928 UTC
+
+Result size of Tidy Core
+  = {terms: 1,372, types: 2,576, coercions: 207}
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+lvl_reZ1 :: [Char]
+[GblId, Str=DmdType]
+lvl_reZ1 =
+  ghc-prim-0.5.0.0:GHC.CString.unpackCString#
+    "length of the data lines do not equal final line length"#
+
+-- RHS size: {terms: 1, types: 6, coercions: 1}
+Main.main_$d~~ :: (Word8 :: *) ~~ (Word8 :: *)
+[GblId,
+ Caf=NoCafRefs,
+ Str=DmdType m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 0 10}]
+Main.main_$d~~ =
+  ghc-prim-0.5.0.0:GHC.Types.Eq#
+    @ *
+    @ *
+    @ Word8
+    @ Word8
+    @~ (<Word8>_N
+        :: (Word8 :: *) ghc-prim-0.5.0.0:GHC.Prim.~# (Word8 :: *))
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.main16 :: [Char]
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 40 0}]
+Main.main16 = ghc-prim-0.5.0.0:GHC.CString.unpackCString# "01 "#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.parserFinalLine5 :: [Char]
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 60 0}]
+Main.parserFinalLine5 =
+  ghc-prim-0.5.0.0:GHC.CString.unpackCString# "99 final "#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+lvl1_reZ2 :: [Char]
+[GblId, Str=DmdType]
+lvl1_reZ2 =
+  ghc-prim-0.5.0.0:GHC.CString.unpackCString# "Cannot read integer"#
+
+-- RHS size: {terms: 15, types: 37, coercions: 0}
+lvl2_reZ3
+  :: forall b_XbYR.
+     State [Char] ()
+     -> (Bool -> State [Char] () -> ParseError -> IO b_XbYR)
+     -> (ParseError -> IO b_XbYR)
+     -> (Bool -> State [Char] () -> ParseError -> IO b_XbYR)
+     -> (ParseError -> IO b_XbYR)
+     -> IO b_XbYR
+lvl2_reZ3 =
+  \ (@ b_XbYR)
+    (s1_XbYT :: State [Char] ())
+    _ [Occ=Dead]
+    _ [Occ=Dead]
+    (eok_XbYZ :: Bool -> State [Char] () -> ParseError -> IO b_XbYR)
+    _ [Occ=Dead] ->
+    eok_XbYZ
+      ghc-prim-0.5.0.0:GHC.Types.True
+      s1_XbYT
+      (case s1_XbYT of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+       Text.Parsec.Error.ParseError
+         ds4_abWC
+         (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+       })
+
+Main.$wmanyLength
+  :: forall a b.
+     Parser a
+  -> State String ()
+  -> (Int -> State String () -> ParseError -> IO b)
+  -> (ParseError -> IO b)
+  -> (Int -> State String () -> ParseError -> IO b)
+  -> IO b
+Main.$wmanyLength p s cok cerr eok =
+  let lvl9_seMG
+        :: forall b.
+           State [Char] ()
+        -> ((Bool -> Bool) -> State [Char] () -> ParseError -> IO b)
+        -> (ParseError -> IO b)
+        -> ((Bool -> Bool) -> State [Char] () -> ParseError -> IO b)
+        -> (ParseError -> IO b)
+        -> IO b
+      lvl9_seMG s' cok' cerr' eok' eerr' =
+        unParser p s' (\ _ -> cok' id) cerr' (\ _ -> eok' id) eerr'
+  letrec {
+    walk
+      :: forall b.
+         Int
+      -> State String ()
+      -> (Int -> State String () -> ParseError -> IO b)
+      -> (ParseError -> IO b)
+      -> (Int -> State String () -> ParseError -> IO b)
+      -> IO b
+    walk i s' cok' cerr' eok' =
+      Text.Parsec.Prim.$fAlternativeParsecT2
+        (lvl9_seMG
+         `cast` (Sym
+                   (Text.Parsec.Prim.N:ParsecT[0]
+                      <[Char]>_R <()>_R <IO>_R <Bool -> Bool>_R)
+                 :: ((forall b_abjg.
+                      State [Char] ()
+                      -> ((Bool -> Bool) -> State [Char] () -> ParseError -> IO b_abjg)
+                      -> (ParseError -> IO b_abjg)
+                      -> ((Bool -> Bool) -> State [Char] () -> ParseError -> IO b_abjg)
+                      -> (ParseError -> IO b_abjg)
+                      -> IO b_abjg) :: *)
+                    ~R#
+                    (ParsecT [Char] () IO (Bool -> Bool) :: *)))
+        (lvl2_reZ3
+         `cast` (Sym
+                   (Text.Parsec.Prim.N:ParsecT[0] <[Char]>_R <()>_R <IO>_R <Bool>_R)
+                 :: ((forall b_abjg.
+                      State [Char] ()
+                      -> (Bool -> State [Char] () -> ParseError -> IO b_abjg)
+                      -> (ParseError -> IO b_abjg)
+                      -> (Bool -> State [Char] () -> ParseError -> IO b_abjg)
+                      -> (ParseError -> IO b_abjg)
+                      -> IO b_abjg) :: *)
+                    ~R#
+                    (ParsecT [Char] () IO Bool :: *)))
+        s'
+        (\ (x_abYQ :: Bool)
+           (s2_abYR  :: State [Char] ())
+           (err_abYS  :: ParseError) ->
+           case x_abYQ of _ [Occ=Dead] {
+             False ->
+               cok'
+                 i
+                 s2_abYR
+                 (case s2_abYR of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                  case ds4_abWC
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww11_seMO ww12_seMP ww13_seMQ ->
+                  case err_abYS
+                  of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww2_abY2 ww3_abY3 ->
+                  case ww2_abY2
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww5_seMJ ww6_seMK ww7_seML ->
+                  case Text.Parsec.Error.$wmergeError
+                         ww5_seMJ
+                         ww6_seMK
+                         ww7_seML
+                         ww3_abY3
+                         ww11_seMO
+                         ww12_seMP
+                         ww13_seMQ
+                         (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                  of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                  Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                  }
+                  }
+                  }
+                  }
+                  });
+             True ->
+               walk
+                 (i + 1)
+                 @ b
+                 s2_abYR
+                 cok'
+                 cerr'
+                 (\ (x1_abYT :: Int)
+                    (s3_abYU  :: State [Char] ())
+                    (err'_abYV  :: ParseError) ->
+                    cok'
+                      x1_abYT s3_abYU (Text.Parsec.Error.mergeError err_abYS err'_abYV))
+           })
+        cerr'
+        (\ (x_abYX :: Bool)
+           (s2_abYY  :: State [Char] ())
+           (err_abYZ  :: ParseError) ->
+           case x_abYX of _ [Occ=Dead] {
+             False ->
+               eok'
+                 i
+                 s2_abYY
+                 (case s2_abYY of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                  case ds4_abWC
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww11_seMY ww12_seMZ ww13_seN0 ->
+                  case err_abYZ
+                  of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww2_abY2 ww3_abY3 ->
+                  case ww2_abY2
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww5_seMT ww6_seMU ww7_seMV ->
+                  case Text.Parsec.Error.$wmergeError
+                         ww5_seMT
+                         ww6_seMU
+                         ww7_seMV
+                         ww3_abY3
+                         ww11_seMY
+                         ww12_seMZ
+                         ww13_seN0
+                         (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                  of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                  Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                  }
+                  }
+                  }
+                  }
+                  });
+             True ->
+               walk
+                 (i + 1)
+                 @ b
+                 s2_abYY
+                 cok'
+                 cerr'
+                 (\ (x1_abZ0 :: Int)
+                    (s3_abZ1  :: State [Char] ())
+                    (err'_abZ2  :: ParseError) ->
+                    eok'
+                      x1_abZ0 s3_abZ1 (Text.Parsec.Error.mergeError err_abYZ err'_abZ2))
+           })
+        (\ (err_abXo :: ParseError) ->
+           eok'
+             i
+             s'
+             (case s' of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+              case ds4_abWC
+              of _ [Occ=Dead]
+              { Text.Parsec.Pos.SourcePos ww11_seN8 ww12_seN9 ww13_seNa ->
+              case err_abXo
+              of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww2_abY2 ww3_abY3 ->
+              case ww2_abY2
+              of _ [Occ=Dead]
+              { Text.Parsec.Pos.SourcePos ww5_seN3 ww6_seN4 ww7_seN5 ->
+              case Text.Parsec.Error.$wmergeError
+                     ww5_seN3
+                     ww6_seN4
+                     ww7_seN5
+                     ww3_abY3
+                     ww11_seN8
+                     ww12_seN9
+                     ww13_seNa
+                     (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+              of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+              case ww15_abYp
+              of _ [Occ=Dead]
+              { Text.Parsec.Pos.SourcePos ww9_Xc0d ww20_Xc0f ww21_Xc0h ->
+              case Text.Parsec.Error.$wmergeError
+                     ww9_Xc0d
+                     ww20_Xc0f
+                     ww21_Xc0h
+                     ww16_abYq
+                     ww11_seN8
+                     ww12_seN9
+                     ww13_seNa
+                     (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+              of _ [Occ=Dead] { (# ww23_Xc0E, ww24_Xc0G #) ->
+              Text.Parsec.Error.ParseError ww23_Xc0E ww24_Xc0G
+              }
+              }
+              }
+              }
+              }
+              }
+              })); } in
+  walk 0 s cok cerr eok
+
+-- RHS size: {terms: 14, types: 31, coercions: 0}
+Main.manyLength1 [InlPrag=INLINE[0]]
+  :: forall a.
+     Parser a
+     -> forall b.
+        State String ()
+        -> (Int -> State String () -> ParseError -> IO b)
+        -> (ParseError -> IO b)
+        -> (Int -> State String () -> ParseError -> IO b)
+        -> (ParseError -> IO b)
+        -> IO b
+[GblId,
+ Arity=6,
+ Str=DmdType <C(C(C(C(C(S))))),C(C1(C1(C1(C1(U)))))><L,U(U,U(U,U,U),U)><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,A>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=6,unsat_ok=True,boring_ok=True)
+         Tmpl= \ (@ a)
+                 (p [Occ=Once] :: Parser a)
+                 (@ b)
+                 (s [Occ=Once] :: State String ())
+                 (cok [Occ=Once]
+                    :: Int -> State String () -> ParseError -> IO b)
+                 (cerr [Occ=Once] :: ParseError -> IO b)
+                 (eok [Occ=Once]
+                    :: Int -> State String () -> ParseError -> IO b)
+                 _ [Occ=Dead] ->
+                 Main.$wmanyLength
+                   @ a p @ b s cok cerr eok}]
+Main.manyLength1 =
+  \ (@ a)
+    (p :: Parser a)
+    (@ b)
+    (s :: State String ())
+    (cok :: Int -> State String () -> ParseError -> IO b)
+    (cerr :: ParseError -> IO b)
+    (eok :: Int -> State String () -> ParseError -> IO b)
+    _ [Occ=Dead] ->
+    Main.$wmanyLength
+      @ a p @ b s cok cerr eok
+
+-- RHS size: {terms: 1, types: 0, coercions: 12}
+manyLength :: forall a_a2vO. Parser a_a2vO -> Parser Int
+[GblId,
+ Arity=6,
+ Str=DmdType <C(C(C(C(C(S))))),C(C1(C1(C1(C1(U)))))><L,U(U,U(U,U,U),U)><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,A>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.manyLength1
+               `cast` (forall (a_a4EX :: <*>_N).
+                       <Parser a_a4EX>_R
+                       -> Sym
+                            (Text.Parsec.Prim.N:ParsecT[0] <String>_R <()>_R <IO>_R <Int>_R)
+                       :: ((forall a_a4EX.
+                            Parser a_a4EX
+                            -> forall b_abjg.
+                               State String ()
+                               -> (Int -> State String () -> ParseError -> IO b_abjg)
+                               -> (ParseError -> IO b_abjg)
+                               -> (Int -> State String () -> ParseError -> IO b_abjg)
+                               -> (ParseError -> IO b_abjg)
+                               -> IO b_abjg) :: *)
+                          ~R#
+                          ((forall a_a4EX.
+                            Parser a_a4EX -> ParsecT String () IO Int) :: *))}]
+manyLength =
+  Main.manyLength1
+  `cast` (forall (a_a4EX :: <*>_N).
+          <Parser a_a4EX>_R
+          -> Sym
+               (Text.Parsec.Prim.N:ParsecT[0] <String>_R <()>_R <IO>_R <Int>_R)
+          :: ((forall a_a4EX.
+               Parser a_a4EX
+               -> forall b_abjg.
+                  State String ()
+                  -> (Int -> State String () -> ParseError -> IO b_abjg)
+                  -> (ParseError -> IO b_abjg)
+                  -> (Int -> State String () -> ParseError -> IO b_abjg)
+                  -> (ParseError -> IO b_abjg)
+                  -> IO b_abjg) :: *)
+             ~R#
+             ((forall a_a4EX. Parser a_a4EX -> ParsecT String () IO Int) :: *))
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.main18 :: [Char]
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 60 0}]
+Main.main18 =
+  ghc-prim-0.5.0.0:GHC.CString.unpackCString# "00 header"#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.$trModule1 :: ghc-prim-0.5.0.0:GHC.Types.TrName
+[GblId,
+ Caf=NoCafRefs,
+ Str=DmdType m1,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
+Main.$trModule1 = ghc-prim-0.5.0.0:GHC.Types.TrNameS "Main"#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.$trModule2 :: ghc-prim-0.5.0.0:GHC.Types.TrName
+[GblId,
+ Caf=NoCafRefs,
+ Str=DmdType m1,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
+Main.$trModule2 = ghc-prim-0.5.0.0:GHC.Types.TrNameS "main"#
+
+-- RHS size: {terms: 3, types: 0, coercions: 0}
+Main.$trModule :: ghc-prim-0.5.0.0:GHC.Types.Module
+[GblId,
+ Caf=NoCafRefs,
+ Str=DmdType m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
+Main.$trModule =
+  ghc-prim-0.5.0.0:GHC.Types.Module Main.$trModule2 Main.$trModule1
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.manyLengthErr1 :: [Char]
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 190 0}]
+Main.manyLengthErr1 =
+  ghc-prim-0.5.0.0:GHC.CString.unpackCString#
+    "manyLength can't be used on a parser that accepts empty input"#
+
+-- RHS size: {terms: 6, types: 10, coercions: 0}
+manyLengthErr
+  :: forall (m_a2vM :: * -> *) a_a2vN. Monad m_a2vM => m_a2vM a_a2vN
+[GblId,
+ Arity=1,
+ Str=DmdType <S(LLLLC(S)),1*U(A,A,A,A,1*C1(U))>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=1,unsat_ok=True,boring_ok=False)
+         Tmpl= \ (@ (m_a4EM :: * -> *))
+                 (@ a_a4EN)
+                 ($dMonad_a5FA [Occ=Once] :: Monad m_a4EM) ->
+                 fail @ m_a4EM $dMonad_a5FA @ a_a4EN Main.manyLengthErr1}]
+manyLengthErr =
+  \ (@ (m_a4EM :: * -> *))
+    (@ a_a4EN)
+    ($dMonad_a5FA :: Monad m_a4EM) ->
+    fail @ m_a4EM $dMonad_a5FA @ a_a4EN Main.manyLengthErr1
+
+-- RHS size: {terms: 1, types: 6, coercions: 1}
+Main.main11 :: (Char :: *) ~~ (Char :: *)
+[GblId,
+ Caf=NoCafRefs,
+ Str=DmdType m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 0 10}]
+Main.main11 =
+  ghc-prim-0.5.0.0:GHC.Types.Eq#
+    @ *
+    @ *
+    @ Char
+    @ Char
+    @~ (<Char>_N
+        :: (Char :: *) ghc-prim-0.5.0.0:GHC.Prim.~# (Char :: *))
+
+-- RHS size: {terms: 14, types: 8, coercions: 12}
+Main.main_f :: [Char] -> ByteString
+[GblId,
+ Arity=1,
+ Str=DmdType <S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0] 120 0}]
+Main.main_f =
+  \ (x_abyf :: [Char]) ->
+    let {
+      ws_acco [Dmd=<S,U>] :: [Word8]
+      [LclId, Str=DmdType]
+      ws_acco =
+        mono-traversable-1.0.2:Data.Sequences.$fUtf8[][]_$cencodeUtf8
+          @ Char
+          @ Word8
+          (Main.main11
+           `cast` (Sym (Data.Type.Equality.N:~[0] <*>_N) <Char>_N <Char>_N
+                   :: ((Char :: *) ~~ (Char :: *) :: Constraint)
+                      ~R#
+                      ((Char :: *) ~ (Char :: *) :: Constraint)))
+          (Main.main_$d~~
+           `cast` (Sym (Data.Type.Equality.N:~[0] <*>_N) <Word8>_N <Word8>_N
+                   :: ((Word8 :: *) ~~ (Word8 :: *) :: Constraint)
+                      ~R#
+                      ((Word8 :: *) ~ (Word8 :: *) :: Constraint)))
+          x_abyf } in
+    case GHC.List.$wlenAcc @ Word8 ws_acco 0#
+    of ww2_acfZ { __DEFAULT ->
+    bytestring-0.10.8.1:Data.ByteString.Internal.$wunsafePackLenBytes
+      ww2_acfZ ws_acco
+    }
+
+-- RHS size: {terms: 2, types: 2, coercions: 0}
+Main.$s$fStream[]mtok_$s$fStream[]mtok_$cp1Stream
+  :: forall tok_abQP. Monad IO
+[GblId,
+ Str=DmdType m,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=False, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= \ (@ tok_abQP) -> GHC.Base.$fMonadIO}]
+Main.$s$fStream[]mtok_$s$fStream[]mtok_$cp1Stream =
+  \ (@ tok_XbQR) -> GHC.Base.$fMonadIO
+
+-- RHS size: {terms: 16, types: 40, coercions: 0}
+$s$fStream[]mtok_$cuncons_reZ7
+  :: forall tok_XbQG.
+     [tok_XbQG]
+     -> ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+     -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld,
+           Maybe (tok_XbQG, [tok_XbQG]) #)
+[GblId, Arity=2, Caf=NoCafRefs, Str=DmdType <S,1*U><S,U>]
+$s$fStream[]mtok_$cuncons_reZ7 =
+  \ (@ tok_XbQG)
+    (ds_abQG :: [tok_XbQG])
+    (eta_B1 [OS=OneShot]
+       :: ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld) ->
+    case ds_abQG of _ [Occ=Dead] {
+      [] -> (# eta_B1, GHC.Base.Nothing @ (tok_XbQG, [tok_XbQG]) #);
+      : t_abQL ts_abQM ->
+        (# eta_B1,
+           GHC.Base.Just @ (tok_XbQG, [tok_XbQG]) (t_abQL, ts_abQM) #)
+    }
+
+-- RHS size: {terms: 1, types: 0, coercions: 13}
+Main.$s$fStream[]mtok_$s$fStream[]mtok_$cuncons [InlPrag=INLINE (sat-args=1)]
+  :: forall tok_abQE. [tok_abQE] -> IO (Maybe (tok_abQE, [tok_abQE]))
+[GblId,
+ Arity=2,
+ Caf=NoCafRefs,
+ Str=DmdType <S,1*U><S,U>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=1,unsat_ok=False,boring_ok=False)
+         Tmpl= \ (@ tok_abQE) (ds_XbSl [Occ=Once!] :: [tok_abQE]) ->
+                 case ds_XbSl of _ [Occ=Dead] {
+                   [] ->
+                     $ @ 'ghc-prim-0.5.0.0:GHC.Types.PtrRepLifted
+                       @ (Maybe (tok_abQE, [tok_abQE]))
+                       @ (IO (Maybe (tok_abQE, [tok_abQE])))
+                       (GHC.Base.returnIO @ (Maybe (tok_abQE, [tok_abQE])))
+                       (GHC.Base.Nothing @ (tok_abQE, [tok_abQE]));
+                   : t_abQL [Occ=Once] ts_abQM [Occ=Once] ->
+                     $ @ 'ghc-prim-0.5.0.0:GHC.Types.PtrRepLifted
+                       @ (Maybe (tok_abQE, [tok_abQE]))
+                       @ (IO (Maybe (tok_abQE, [tok_abQE])))
+                       (GHC.Base.returnIO @ (Maybe (tok_abQE, [tok_abQE])))
+                       (GHC.Base.Just @ (tok_abQE, [tok_abQE]) (t_abQL, ts_abQM))
+                 }}]
+Main.$s$fStream[]mtok_$s$fStream[]mtok_$cuncons =
+  $s$fStream[]mtok_$cuncons_reZ7
+  `cast` (forall (tok_XbQG :: <*>_N).
+          <[tok_XbQG]>_R
+          -> Sym
+               (ghc-prim-0.5.0.0:GHC.Types.N:IO[0]
+                  <Maybe (tok_XbQG, [tok_XbQG])>_R)
+          :: ((forall tok_XbQG.
+               [tok_XbQG]
+               -> ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+               -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld,
+                     Maybe (tok_XbQG, [tok_XbQG]) #)) :: *)
+             ~R#
+             ((forall tok_XbQG.
+               [tok_XbQG] -> IO (Maybe (tok_XbQG, [tok_XbQG]))) :: *))
+
+-- RHS size: {terms: 4, types: 7, coercions: 0}
+Main.$s$fStream[]mtok [InlPrag=[ALWAYS] CONLIKE]
+  :: forall tok_aayb. Text.Parsec.Prim.Stream [tok_aayb] IO tok_aayb
+[GblId,
+ Str=DmdType m,
+ Unf=DFun: \ (@ tok_aayb) ->
+       Text.Parsec.Prim.C:Stream TYPE: [tok_aayb]
+                                 TYPE: IO
+                                 TYPE: tok_aayb
+                                 Main.$s$fStream[]mtok_$s$fStream[]mtok_$cp1Stream @ tok_aayb
+                                 Main.$s$fStream[]mtok_$s$fStream[]mtok_$cuncons @ tok_aayb]
+Main.$s$fStream[]mtok =
+  \ (@ tok_Xayd) ->
+    Text.Parsec.Prim.C:Stream
+      @ [tok_Xayd]
+      @ IO
+      @ tok_Xayd
+      GHC.Base.$fMonadIO
+      (Main.$s$fStream[]mtok_$s$fStream[]mtok_$cuncons @ tok_Xayd)
+
+-- RHS size: {terms: 20, types: 42, coercions: 0}
+Main.parserHeaderLine1
+  :: forall b1_abVT.
+     State [Char] ()
+     -> (HeaderLine -> State [Char] () -> ParseError -> IO b1_abVT)
+     -> (ParseError -> IO b1_abVT)
+     -> (HeaderLine -> State [Char] () -> ParseError -> IO b1_abVT)
+     -> (ParseError -> IO b1_abVT)
+     -> IO b1_abVT
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U(U,U(U,U,U),U)><L,C(C1(C1(U)))><L,C(U)><L,1*C1(C1(C1(U)))><L,C(U)>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 0 60 0] 150 0}]
+Main.parserHeaderLine1 =
+  \ (@ b1_abVT)
+    (eta2_abVU :: State [Char] ())
+    (eta3_abVV
+       :: HeaderLine -> State [Char] () -> ParseError -> IO b1_abVT)
+    (eta4_abVW :: ParseError -> IO b1_abVT)
+    (eta5_abVX
+       :: HeaderLine -> State [Char] () -> ParseError -> IO b1_abVT)
+    (eta6_abVY :: ParseError -> IO b1_abVT) ->
+    let {
+      lvl9_seNd :: State [Char] () -> ParseError -> IO b1_abVT
+      [LclId, Str=DmdType]
+      lvl9_seNd = eta3_abVV Types.HL } in
+    Text.Parsec.Char.string1
+      @ String
+      @ IO
+      @ ()
+      (Main.$s$fStream[]mtok @ Char)
+      Main.main18
+      @ b1_abVT
+      eta2_abVU
+      (\ _ [Occ=Dead] -> lvl9_seNd)
+      eta4_abVW
+      (\ _ [Occ=Dead, OS=OneShot] -> eta5_abVX Types.HL)
+      eta6_abVY
+
+-- RHS size: {terms: 1, types: 0, coercions: 7}
+parserHeaderLine :: Parser HeaderLine
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U(U,U(U,U,U),U)><L,C(C1(C1(U)))><L,C(U)><L,1*C1(C1(C1(U)))><L,C(U)>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.parserHeaderLine1
+               `cast` (Sym
+                         (Text.Parsec.Prim.N:ParsecT[0]
+                            <[Char]>_R <()>_R <IO>_R <HeaderLine>_R)
+                       :: ((forall b_abjg.
+                            State [Char] ()
+                            -> (HeaderLine -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> (HeaderLine -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> IO b_abjg) :: *)
+                          ~R#
+                          (ParsecT [Char] () IO HeaderLine :: *))}]
+parserHeaderLine =
+  Main.parserHeaderLine1
+  `cast` (Sym
+            (Text.Parsec.Prim.N:ParsecT[0]
+               <[Char]>_R <()>_R <IO>_R <HeaderLine>_R)
+          :: ((forall b_abjg.
+               State [Char] ()
+               -> (HeaderLine -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> (HeaderLine -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> IO b_abjg) :: *)
+             ~R#
+             (ParsecT [Char] () IO HeaderLine :: *))
+
+-- RHS size: {terms: 22, types: 40, coercions: 0}
+lvl3_reZ8
+  :: forall b_acaD.
+     State String ()
+     -> (Char -> State String () -> ParseError -> IO b_acaD)
+     -> (ParseError -> IO b_acaD)
+     -> (Char -> State String () -> ParseError -> IO b_acaD)
+     -> (ParseError -> IO b_acaD)
+     -> IO b_acaD
+[GblId, Arity=5, Str=DmdType]
+lvl3_reZ8 =
+  \ (@ b_acaD)
+    (w2_acaE [OS=OneShot] :: State String ())
+    (w3_acaF [OS=OneShot]
+       :: Char -> State String () -> ParseError -> IO b_acaD)
+    _ [Occ=Dead, OS=OneShot]
+    _ [Occ=Dead, OS=OneShot]
+    (w6_acaI [OS=OneShot] :: ParseError -> IO b_acaD) ->
+    case w2_acaE of _ [Occ=Dead] { State ww1_acaL ww2_acaM ww3_acaN ->
+    case ww2_acaM
+    of _ [Occ=Dead]
+    { Text.Parsec.Pos.SourcePos ww5_seNg ww6_seNh ww7_seNi ->
+    Text.Parsec.Char.$wsatisfy
+      @ String
+      @ IO
+      @ ()
+      (Main.$s$fStream[]mtok @ Char)
+      GHC.Unicode.isDigit
+      @ b_acaD
+      ww1_acaL
+      ww5_seNg
+      ww6_seNh
+      ww7_seNi
+      ww3_acaN
+      w3_acaF
+      w6_acaI
+    }
+    }
+
+-- RHS size: {terms: 3, types: 2, coercions: 0}
+lvl4_reZ9 :: [String]
+[GblId, Str=DmdType]
+lvl4_reZ9 =
+  ghc-prim-0.5.0.0:GHC.Types.:
+    @ String
+    Text.Parsec.Char.digit2
+    (ghc-prim-0.5.0.0:GHC.Types.[] @ String)
+
+-- RHS size: {terms: 14, types: 30, coercions: 6}
+p_reZa
+  :: forall b_ac4P.
+     State String ()
+     -> (Char -> State String () -> ParseError -> IO b_ac4P)
+     -> (ParseError -> IO b_ac4P)
+     -> (Char -> State String () -> ParseError -> IO b_ac4P)
+     -> (ParseError -> IO b_ac4P)
+     -> IO b_ac4P
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,U><L,U><L,C(C1(C1(U)))><L,C(U)>]
+p_reZa =
+  \ (@ b_ac4P)
+    (eta_ac4Q :: State String ())
+    (eta2_ac4R :: Char -> State String () -> ParseError -> IO b_ac4P)
+    (eta3_ac4S :: ParseError -> IO b_ac4P)
+    (eta4_ac4T :: Char -> State String () -> ParseError -> IO b_ac4P)
+    (eta5_ac4U :: ParseError -> IO b_ac4P) ->
+    Text.Parsec.Prim.<?>2
+      @ String
+      @ ()
+      @ IO
+      @ Char
+      (lvl3_reZ8
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0] <String>_R <()>_R <IO>_R <Char>_R)
+               :: ((forall b_abjg.
+                    State String ()
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT String () IO Char :: *)))
+      lvl4_reZ9
+      @ b_ac4P
+      eta_ac4Q
+      eta2_ac4R
+      eta3_ac4S
+      eta4_ac4T
+      eta5_ac4U
+
+-- RHS size: {terms: 4, types: 2, coercions: 0}
+lvl5_reZb :: Text.ParserCombinators.ReadP.P Int
+[GblId, Str=DmdType]
+lvl5_reZb =
+  GHC.Read.$fReadInt3
+    GHC.Read.$fReadInt_$sconvertInt
+    Text.ParserCombinators.ReadPrec.minPrec
+    @ Int
+    (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure @ Int)
+
+-- RHS size: {terms: 229, types: 260, coercions: 6}
+Main.parserFinalLine3
+  :: forall b1_abYK.
+     State [Char] ()
+     -> (Int -> State [Char] () -> ParseError -> IO b1_abYK)
+     -> (ParseError -> IO b1_abYK)
+     -> (Int -> State [Char] () -> ParseError -> IO b1_abYK)
+     -> (ParseError -> IO b1_abYK)
+     -> IO b1_abYK
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>]
+Main.parserFinalLine3 =
+  \ (@ b1_abYK)
+    (s1_abYL :: State [Char] ())
+    (cok_abYM :: Int -> State [Char] () -> ParseError -> IO b1_abYK)
+    (cerr_abYN :: ParseError -> IO b1_abYK)
+    (eok_abYO :: Int -> State [Char] () -> ParseError -> IO b1_abYK)
+    (eerr_abYP :: ParseError -> IO b1_abYK) ->
+    Text.Parsec.Combinator.$wmany1
+      @ String
+      @ IO
+      @ Char
+      @ ()
+      @ Char
+      (p_reZa
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0] <String>_R <()>_R <IO>_R <Char>_R)
+               :: ((forall b_abjg.
+                    State String ()
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT String () IO Char :: *)))
+      @ b1_abYK
+      s1_abYL
+      (\ (x_abyf :: [Char])
+         (s2_abYR [OS=OneShot] :: State [Char] ())
+         (err_abYS [OS=OneShot] :: ParseError) ->
+         case classy-prelude-1.2.0.1:ClassyPrelude.readMay1
+                @ Int (Text.ParserCombinators.ReadP.run @ Int lvl5_reZb x_abyf)
+         of _ [Occ=Dead] {
+           [] ->
+             cerr_abYN
+               (case err_abYS
+                of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                case ww1_abY2
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww4_abY7 ww5_abY8 ww6_abY9 ->
+                case s2_abYR of _ [Occ=Dead] { State ds_acbP ds1_acbQ ds2_acbR ->
+                case ds1_acbQ
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww11_abYj ww12_abYk ww13_abYl ->
+                case Text.Parsec.Error.$wmergeError
+                       ww4_abY7
+                       ww5_abY8
+                       ww6_abY9
+                       ww2_abY3
+                       ww11_abYj
+                       ww12_abYk
+                       ww13_abYl
+                       (ghc-prim-0.5.0.0:GHC.Types.:
+                          @ Text.Parsec.Error.Message
+                          (case lvl1_reZ2 of dt_acbT { __DEFAULT ->
+                           Text.Parsec.Error.Message dt_acbT
+                           })
+                          (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message))
+                of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                }
+                }
+                }
+                }
+                });
+           : x1_ab4d ds_ab4e ->
+             case ds_ab4e of _ [Occ=Dead] {
+               [] ->
+                 cok_abYM
+                   x1_ab4d
+                   s2_abYR
+                   (case err_abYS
+                    of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                    case ww1_abY2
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww4_abY7 ww5_abY8 ww6_abY9 ->
+                    case s2_abYR of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                    case ds4_abWC
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww11_abYj ww12_abYk ww13_abYl ->
+                    case Text.Parsec.Error.$wmergeError
+                           ww4_abY7
+                           ww5_abY8
+                           ww6_abY9
+                           ww2_abY3
+                           ww11_abYj
+                           ww12_abYk
+                           ww13_abYl
+                           (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                    of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                    Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                    }
+                    }
+                    }
+                    }
+                    });
+               : ipv_abZ8 ipv1_abZ9 ->
+                 cerr_abYN
+                   (case err_abYS
+                    of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                    case ww1_abY2
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww4_abY7 ww5_abY8 ww6_abY9 ->
+                    case s2_abYR of _ [Occ=Dead] { State ds1_acbP ds2_acbQ ds3_acbR ->
+                    case ds2_acbQ
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww11_abYj ww12_abYk ww13_abYl ->
+                    case Text.Parsec.Error.$wmergeError
+                           ww4_abY7
+                           ww5_abY8
+                           ww6_abY9
+                           ww2_abY3
+                           ww11_abYj
+                           ww12_abYk
+                           ww13_abYl
+                           (ghc-prim-0.5.0.0:GHC.Types.:
+                              @ Text.Parsec.Error.Message
+                              (case lvl1_reZ2 of dt_acbT { __DEFAULT ->
+                               Text.Parsec.Error.Message dt_acbT
+                               })
+                              (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message))
+                    of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                    Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                    }
+                    }
+                    }
+                    }
+                    })
+             }
+         })
+      cerr_abYN
+      (\ (x_abyf :: [Char])
+         (s2_abYY [OS=OneShot] :: State [Char] ())
+         (err_abYZ [OS=OneShot] :: ParseError) ->
+         case classy-prelude-1.2.0.1:ClassyPrelude.readMay1
+                @ Int (Text.ParserCombinators.ReadP.run @ Int lvl5_reZb x_abyf)
+         of _ [Occ=Dead] {
+           [] ->
+             eerr_abYP
+               (case err_abYZ
+                of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                case ww1_abY2
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww4_abY7 ww5_abY8 ww6_abY9 ->
+                case s2_abYY of _ [Occ=Dead] { State ds_acbP ds1_acbQ ds2_acbR ->
+                case ds1_acbQ
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww11_abYj ww12_abYk ww13_abYl ->
+                case Text.Parsec.Error.$wmergeError
+                       ww4_abY7
+                       ww5_abY8
+                       ww6_abY9
+                       ww2_abY3
+                       ww11_abYj
+                       ww12_abYk
+                       ww13_abYl
+                       (ghc-prim-0.5.0.0:GHC.Types.:
+                          @ Text.Parsec.Error.Message
+                          (case lvl1_reZ2 of dt_acbT { __DEFAULT ->
+                           Text.Parsec.Error.Message dt_acbT
+                           })
+                          (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message))
+                of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                }
+                }
+                }
+                }
+                });
+           : x1_ab4d ds_ab4e ->
+             case ds_ab4e of _ [Occ=Dead] {
+               [] ->
+                 eok_abYO
+                   x1_ab4d
+                   s2_abYY
+                   (case err_abYZ
+                    of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                    case ww1_abY2
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww4_abY7 ww5_abY8 ww6_abY9 ->
+                    case s2_abYY of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                    case ds4_abWC
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww11_abYj ww12_abYk ww13_abYl ->
+                    case Text.Parsec.Error.$wmergeError
+                           ww4_abY7
+                           ww5_abY8
+                           ww6_abY9
+                           ww2_abY3
+                           ww11_abYj
+                           ww12_abYk
+                           ww13_abYl
+                           (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                    of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                    Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                    }
+                    }
+                    }
+                    }
+                    });
+               : ipv_abZ8 ipv1_abZ9 ->
+                 eerr_abYP
+                   (case err_abYZ
+                    of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                    case ww1_abY2
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww4_abY7 ww5_abY8 ww6_abY9 ->
+                    case s2_abYY of _ [Occ=Dead] { State ds1_acbP ds2_acbQ ds3_acbR ->
+                    case ds2_acbQ
+                    of _ [Occ=Dead]
+                    { Text.Parsec.Pos.SourcePos ww11_abYj ww12_abYk ww13_abYl ->
+                    case Text.Parsec.Error.$wmergeError
+                           ww4_abY7
+                           ww5_abY8
+                           ww6_abY9
+                           ww2_abY3
+                           ww11_abYj
+                           ww12_abYk
+                           ww13_abYl
+                           (ghc-prim-0.5.0.0:GHC.Types.:
+                              @ Text.Parsec.Error.Message
+                              (case lvl1_reZ2 of dt_acbT { __DEFAULT ->
+                               Text.Parsec.Error.Message dt_acbT
+                               })
+                              (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message))
+                    of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                    Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                    }
+                    }
+                    }
+                    }
+                    })
+             }
+         })
+      eerr_abYP
+
+-- RHS size: {terms: 1, types: 0, coercions: 7}
+parserInt :: Parser Int
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.parserFinalLine3
+               `cast` (Sym
+                         (Text.Parsec.Prim.N:ParsecT[0] <[Char]>_R <()>_R <IO>_R <Int>_R)
+                       :: ((forall b_abjg.
+                            State [Char] ()
+                            -> (Int -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> (Int -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> IO b_abjg) :: *)
+                          ~R#
+                          (ParsecT [Char] () IO Int :: *))}]
+parserInt =
+  Main.parserFinalLine3
+  `cast` (Sym
+            (Text.Parsec.Prim.N:ParsecT[0] <[Char]>_R <()>_R <IO>_R <Int>_R)
+          :: ((forall b_abjg.
+               State [Char] ()
+               -> (Int -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> (Int -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> IO b_abjg) :: *)
+             ~R#
+             (ParsecT [Char] () IO Int :: *))
+
+-- RHS size: {terms: 16, types: 31, coercions: 4}
+Main.parserFinalLine2
+  :: forall b1_XbZr.
+     State [Char] ()
+     -> (FinalLine -> State [Char] () -> ParseError -> IO b1_XbZr)
+     -> (ParseError -> IO b1_XbZr)
+     -> (FinalLine -> State [Char] () -> ParseError -> IO b1_XbZr)
+     -> (ParseError -> IO b1_XbZr)
+     -> IO b1_XbZr
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=5,unsat_ok=True,boring_ok=False)
+         Tmpl= \ (@ b1_XbZr)
+                 (eta_XbZt [Occ=Once] :: State [Char] ())
+                 (eta2_XbZv [Occ=OnceL!]
+                    :: FinalLine -> State [Char] () -> ParseError -> IO b1_XbZr)
+                 (eta3_XbZx [Occ=Once] :: ParseError -> IO b1_XbZr)
+                 (eta4_XbZz [Occ=OnceL!]
+                    :: FinalLine -> State [Char] () -> ParseError -> IO b1_XbZr)
+                 (eta5_XbZB [Occ=Once] :: ParseError -> IO b1_XbZr) ->
+                 Main.parserFinalLine3
+                   @ b1_XbZr
+                   eta_XbZt
+                   (\ (x_abyf [Occ=Once] :: Int) ->
+                      eta2_XbZv
+                        (x_abyf
+                         `cast` (Sym Types.N:FinalLine[0]
+                                 :: (Int :: *) ~R# (FinalLine :: *))))
+                   eta3_XbZx
+                   (\ (x_abyf [Occ=Once] :: Int) ->
+                      eta4_XbZz
+                        (x_abyf
+                         `cast` (Sym Types.N:FinalLine[0]
+                                 :: (Int :: *) ~R# (FinalLine :: *))))
+                   eta5_XbZB}]
+Main.parserFinalLine2 =
+  \ (@ b1_XbZr)
+    (eta_XbZt :: State [Char] ())
+    (eta2_XbZv
+       :: FinalLine -> State [Char] () -> ParseError -> IO b1_XbZr)
+    (eta3_XbZx :: ParseError -> IO b1_XbZr)
+    (eta4_XbZz
+       :: FinalLine -> State [Char] () -> ParseError -> IO b1_XbZr)
+    (eta5_XbZB :: ParseError -> IO b1_XbZr) ->
+    Main.parserFinalLine3
+      @ b1_XbZr
+      eta_XbZt
+      (\ (x_abyf :: Int) ->
+         eta2_XbZv
+           (x_abyf
+            `cast` (Sym Types.N:FinalLine[0]
+                    :: (Int :: *) ~R# (FinalLine :: *))))
+      eta3_XbZx
+      (\ (x_abyf :: Int) ->
+         eta4_XbZz
+           (x_abyf
+            `cast` (Sym Types.N:FinalLine[0]
+                    :: (Int :: *) ~R# (FinalLine :: *))))
+      eta5_XbZB
+
+-- RHS size: {terms: 20, types: 46, coercions: 0}
+Main.parserFinalLine4
+  :: forall b1_Xc33.
+     State [Char] ()
+     -> ((FinalLine -> FinalLine)
+         -> State [Char] () -> ParseError -> IO b1_Xc33)
+     -> (ParseError -> IO b1_Xc33)
+     -> ((FinalLine -> FinalLine)
+         -> State [Char] () -> ParseError -> IO b1_Xc33)
+     -> (ParseError -> IO b1_Xc33)
+     -> IO b1_Xc33
+[GblId,
+ Arity=5,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 0 60 0] 150 0}]
+Main.parserFinalLine4 =
+  \ (@ b1_Xc33)
+    (eta2_Xc36 [OS=OneShot] :: State [Char] ())
+    (eta3_Xc39 [OS=OneShot]
+       :: (FinalLine -> FinalLine)
+          -> State [Char] () -> ParseError -> IO b1_Xc33)
+    (eta4_Xc3c [OS=OneShot] :: ParseError -> IO b1_Xc33)
+    (eta5_Xc3f [OS=OneShot]
+       :: (FinalLine -> FinalLine)
+          -> State [Char] () -> ParseError -> IO b1_Xc33)
+    (eta6_XbZD [OS=OneShot] :: ParseError -> IO b1_Xc33) ->
+    let {
+      lvl9_seNn :: State [Char] () -> ParseError -> IO b1_Xc33
+      [LclId, Str=DmdType]
+      lvl9_seNn = eta3_Xc39 (GHC.Base.breakpoint @ FinalLine) } in
+    Text.Parsec.Char.string1
+      @ String
+      @ IO
+      @ ()
+      (Main.$s$fStream[]mtok @ Char)
+      Main.parserFinalLine5
+      @ b1_Xc33
+      eta2_Xc36
+      (\ _ [Occ=Dead] -> lvl9_seNn)
+      eta4_Xc3c
+      (\ _ [Occ=Dead, OS=OneShot] ->
+         eta5_Xc3f (GHC.Base.breakpoint @ FinalLine))
+      eta6_XbZD
+
+-- RHS size: {terms: 14, types: 35, coercions: 15}
+Main.parserFinalLine1
+  :: forall b1_abXB.
+     State [Char] ()
+     -> (FinalLine -> State [Char] () -> ParseError -> IO b1_abXB)
+     -> (ParseError -> IO b1_abXB)
+     -> (FinalLine -> State [Char] () -> ParseError -> IO b1_abXB)
+     -> (ParseError -> IO b1_abXB)
+     -> IO b1_abXB
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 0 0 0 0] 80 0}]
+Main.parserFinalLine1 =
+  \ (@ b1_abXB)
+    (eta2_abXC :: State [Char] ())
+    (eta3_abXD
+       :: FinalLine -> State [Char] () -> ParseError -> IO b1_abXB)
+    (eta4_abXE :: ParseError -> IO b1_abXB)
+    (eta5_abXF
+       :: FinalLine -> State [Char] () -> ParseError -> IO b1_abXB)
+    (eta6_abXG :: ParseError -> IO b1_abXB) ->
+    Text.Parsec.Prim.$fAlternativeParsecT2
+      @ [Char]
+      @ ()
+      @ IO
+      @ FinalLine
+      @ FinalLine
+      (Main.parserFinalLine4
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0]
+                    <[Char]>_R <()>_R <IO>_R <FinalLine -> FinalLine>_R)
+               :: ((forall b_abjg.
+                    State [Char] ()
+                    -> ((FinalLine -> FinalLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> ((FinalLine -> FinalLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT [Char] () IO (FinalLine -> FinalLine) :: *)))
+      (Main.parserFinalLine2
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0]
+                    <[Char]>_R <()>_R <IO>_R <FinalLine>_R)
+               :: ((forall b_abjg.
+                    State [Char] ()
+                    -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT [Char] () IO FinalLine :: *)))
+      @ b1_abXB
+      eta2_abXC
+      eta3_abXD
+      eta4_abXE
+      eta5_abXF
+      eta6_abXG
+
+-- RHS size: {terms: 1, types: 0, coercions: 7}
+parserFinalLine :: Parser FinalLine
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.parserFinalLine1
+               `cast` (Sym
+                         (Text.Parsec.Prim.N:ParsecT[0]
+                            <[Char]>_R <()>_R <IO>_R <FinalLine>_R)
+                       :: ((forall b_abjg.
+                            State [Char] ()
+                            -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> IO b_abjg) :: *)
+                          ~R#
+                          (ParsecT [Char] () IO FinalLine :: *))}]
+parserFinalLine =
+  Main.parserFinalLine1
+  `cast` (Sym
+            (Text.Parsec.Prim.N:ParsecT[0]
+               <[Char]>_R <()>_R <IO>_R <FinalLine>_R)
+          :: ((forall b_abjg.
+               State [Char] ()
+               -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> IO b_abjg) :: *)
+             ~R#
+             (ParsecT [Char] () IO FinalLine :: *))
+
+-- RHS size: {terms: 5, types: 1, coercions: 0}
+lvl6_reZc :: Text.Parsec.Error.Message
+[GblId, Str=DmdType]
+lvl6_reZc =
+  case lvl_reZ1 of dt_acbT { __DEFAULT ->
+  Text.Parsec.Error.Message dt_acbT
+  }
+
+-- RHS size: {terms: 3, types: 2, coercions: 0}
+lvl7_reZd :: [Text.Parsec.Error.Message]
+[GblId, Str=DmdType]
+lvl7_reZd =
+  ghc-prim-0.5.0.0:GHC.Types.:
+    @ Text.Parsec.Error.Message
+    lvl6_reZc
+    (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+
+-- RHS size: {terms: 157, types: 178, coercions: 17}
+Main.main6
+  :: Int
+     -> forall b_abjg.
+        State [Char] ()
+        -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+        -> (ParseError -> IO b_abjg)
+        -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+        -> (ParseError -> IO b_abjg)
+        -> IO b_abjg
+[GblId,
+ Arity=6,
+ Str=DmdType <L,U(U)><L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>]
+Main.main6 =
+  \ (len_a2YL :: Int)
+    (@ b_abjg)
+    (eta_B5 [OS=ProbOneShot] :: State [Char] ())
+    (eta2_B4 [OS=ProbOneShot]
+       :: () -> State [Char] () -> ParseError -> IO b_abjg)
+    (eta3_B3 [OS=ProbOneShot] :: ParseError -> IO b_abjg)
+    (eta4_B2 [OS=ProbOneShot]
+       :: () -> State [Char] () -> ParseError -> IO b_abjg)
+    (eta5_B1 [OS=ProbOneShot] :: ParseError -> IO b_abjg) ->
+    Text.Parsec.Prim.$fAlternativeParsecT2
+      @ [Char]
+      @ ()
+      @ IO
+      @ FinalLine
+      @ FinalLine
+      (Main.parserFinalLine4
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0]
+                    <[Char]>_R <()>_R <IO>_R <FinalLine -> FinalLine>_R)
+               :: ((forall b_abjg.
+                    State [Char] ()
+                    -> ((FinalLine -> FinalLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> ((FinalLine -> FinalLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT [Char] () IO (FinalLine -> FinalLine) :: *)))
+      (Main.parserFinalLine2
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0]
+                    <[Char]>_R <()>_R <IO>_R <FinalLine>_R)
+               :: ((forall b_abjg.
+                    State [Char] ()
+                    -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> (FinalLine -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT [Char] () IO FinalLine :: *)))
+      @ b_abjg
+      eta_B5
+      (\ (x_abYQ :: FinalLine)
+         (s2_abYR [OS=OneShot] :: State [Char] ())
+         (err_abYS [OS=OneShot] :: ParseError) ->
+         case len_a2YL
+         of _ [Occ=Dead] { ghc-prim-0.5.0.0:GHC.Types.I# x1_abz6 ->
+         case x_abYQ
+              `cast` (Types.N:FinalLine[0] :: (FinalLine :: *) ~R# (Int :: *))
+         of _ [Occ=Dead] { ghc-prim-0.5.0.0:GHC.Types.I# y_abza ->
+         case ghc-prim-0.5.0.0:GHC.Prim.tagToEnum#
+                @ Bool (ghc-prim-0.5.0.0:GHC.Prim./=# x1_abz6 y_abza)
+         of _ [Occ=Dead] {
+           False ->
+             eta2_B4
+               ghc-prim-0.5.0.0:GHC.Tuple.()
+               s2_abYR
+               (case s2_abYR of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                case ds4_abWC
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww11_seNw ww12_seNx ww13_seNy ->
+                case err_abYS
+                of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                case ww1_abY2
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww4_seNr ww5_seNs ww6_seNt ->
+                case Text.Parsec.Error.$wmergeError
+                       ww4_seNr
+                       ww5_seNs
+                       ww6_seNt
+                       ww2_abY3
+                       ww11_seNw
+                       ww12_seNx
+                       ww13_seNy
+                       (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                }
+                }
+                }
+                }
+                });
+           True ->
+             eta3_B3
+               (case s2_abYR of _ [Occ=Dead] { State ds_acbP ds1_acbQ ds2_acbR ->
+                case ds1_acbQ
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww11_seNG ww12_seNH ww13_seNI ->
+                case err_abYS
+                of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                case ww1_abY2
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww4_seNB ww5_seNC ww6_seND ->
+                case Text.Parsec.Error.$wmergeError
+                       ww4_seNB
+                       ww5_seNC
+                       ww6_seND
+                       ww2_abY3
+                       ww11_seNG
+                       ww12_seNH
+                       ww13_seNI
+                       lvl7_reZd
+                of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                }
+                }
+                }
+                }
+                })
+         }
+         }
+         })
+      eta3_B3
+      (\ (x_abYX :: FinalLine)
+         (s2_abYY [OS=OneShot] :: State [Char] ())
+         (err_abYZ [OS=OneShot] :: ParseError) ->
+         case len_a2YL
+         of _ [Occ=Dead] { ghc-prim-0.5.0.0:GHC.Types.I# x1_abz6 ->
+         case x_abYX
+              `cast` (Types.N:FinalLine[0] :: (FinalLine :: *) ~R# (Int :: *))
+         of _ [Occ=Dead] { ghc-prim-0.5.0.0:GHC.Types.I# y_abza ->
+         case ghc-prim-0.5.0.0:GHC.Prim.tagToEnum#
+                @ Bool (ghc-prim-0.5.0.0:GHC.Prim./=# x1_abz6 y_abza)
+         of _ [Occ=Dead] {
+           False ->
+             eta4_B2
+               ghc-prim-0.5.0.0:GHC.Tuple.()
+               s2_abYY
+               (case s2_abYY of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                case ds4_abWC
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww11_seNS ww12_seNT ww13_seNU ->
+                case err_abYZ
+                of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                case ww1_abY2
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww4_seNN ww5_seNO ww6_seNP ->
+                case Text.Parsec.Error.$wmergeError
+                       ww4_seNN
+                       ww5_seNO
+                       ww6_seNP
+                       ww2_abY3
+                       ww11_seNS
+                       ww12_seNT
+                       ww13_seNU
+                       (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                }
+                }
+                }
+                }
+                });
+           True ->
+             eta5_B1
+               (case s2_abYY of _ [Occ=Dead] { State ds_acbP ds1_acbQ ds2_acbR ->
+                case ds1_acbQ
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww11_seO2 ww12_seO3 ww13_seO4 ->
+                case err_abYZ
+                of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                case ww1_abY2
+                of _ [Occ=Dead]
+                { Text.Parsec.Pos.SourcePos ww4_seNX ww5_seNY ww6_seNZ ->
+                case Text.Parsec.Error.$wmergeError
+                       ww4_seNX
+                       ww5_seNY
+                       ww6_seNZ
+                       ww2_abY3
+                       ww11_seO2
+                       ww12_seO3
+                       ww13_seO4
+                       lvl7_reZd
+                of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                }
+                }
+                }
+                }
+                })
+         }
+         }
+         })
+      eta5_B1
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+lvl8_reZe :: Char
+[GblId, Caf=NoCafRefs, Str=DmdType]
+lvl8_reZe = ghc-prim-0.5.0.0:GHC.Types.C# ' '#
+
+-- RHS size: {terms: 3, types: 4, coercions: 0}
+eta1_reZf :: ParsecT [Char] () IO Char
+[GblId, Str=DmdType]
+eta1_reZf =
+  char @ String @ IO @ () (Main.$s$fStream[]mtok @ Char) lvl8_reZe
+
+-- RHS size: {terms: 132, types: 189, coercions: 6}
+Main.main12
+  :: ByteString
+     -> forall b_abjg.
+        State [Char] ()
+        -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+        -> (ParseError -> IO b_abjg)
+        -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+        -> (ParseError -> IO b_abjg)
+        -> IO b_abjg
+[GblId,
+ Arity=6,
+ Str=DmdType <L,U><L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>]
+Main.main12 =
+  \ (quote_a2Rv :: ByteString)
+    (@ b_abjg)
+    (eta_B5 :: State [Char] ())
+    (eta2_B4 :: DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+    (eta3_B3 :: ParseError -> IO b_abjg)
+    (eta4_B2 :: DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+    (eta5_B1 :: ParseError -> IO b_abjg) ->
+    let {
+      k_scgI
+        :: forall b1_Xc2R.
+           State [Char] ()
+           -> (DataLine -> State [Char] () -> ParseError -> IO b1_Xc2R)
+           -> (ParseError -> IO b1_Xc2R)
+           -> (DataLine -> State [Char] () -> ParseError -> IO b1_Xc2R)
+           -> (ParseError -> IO b1_Xc2R)
+           -> IO b1_Xc2R
+      [LclId,
+       Arity=5,
+       Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>]
+      k_scgI =
+        \ (@ b1_Xc2R)
+          (s1_Xc2T :: State [Char] ())
+          (cok_Xc2V [OS=OneShot]
+             :: DataLine -> State [Char] () -> ParseError -> IO b1_Xc2R)
+          (cerr_Xc2X [OS=OneShot] :: ParseError -> IO b1_Xc2R)
+          (eok_Xc2Z [OS=OneShot]
+             :: DataLine -> State [Char] () -> ParseError -> IO b1_Xc2R)
+          (eerr_Xc7d [OS=OneShot] :: ParseError -> IO b1_Xc2R) ->
+          Main.parserFinalLine3
+            @ b1_Xc2R
+            s1_Xc2T
+            (\ (x_abYQ :: Int)
+               (s2_abYR [OS=OneShot] :: State [Char] ())
+               (err_abYS [OS=OneShot] :: ParseError) ->
+               cok_Xc2V
+                 (Types.DL quote_a2Rv x_abYQ)
+                 s2_abYR
+                 (case s2_abYR of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                  case ds4_abWC
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww11_seOf ww12_seOg ww13_seOh ->
+                  case err_abYS
+                  of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                  case ww1_abY2
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww4_seOa ww5_seOb ww6_seOc ->
+                  case Text.Parsec.Error.$wmergeError
+                         ww4_seOa
+                         ww5_seOb
+                         ww6_seOc
+                         ww2_abY3
+                         ww11_seOf
+                         ww12_seOg
+                         ww13_seOh
+                         (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                  of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                  Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                  }
+                  }
+                  }
+                  }
+                  }))
+            cerr_Xc2X
+            (\ (x_abYX :: Int)
+               (s2_abYY [OS=OneShot] :: State [Char] ())
+               (err_abYZ [OS=OneShot] :: ParseError) ->
+               eok_Xc2Z
+                 (Types.DL quote_a2Rv x_abYX)
+                 s2_abYY
+                 (case s2_abYY of _ [Occ=Dead] { State ds3_abWB ds4_abWC ds5_abWD ->
+                  case ds4_abWC
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww11_seOp ww12_seOq ww13_seOr ->
+                  case err_abYZ
+                  of _ [Occ=Dead] { Text.Parsec.Error.ParseError ww1_abY2 ww2_abY3 ->
+                  case ww1_abY2
+                  of _ [Occ=Dead]
+                  { Text.Parsec.Pos.SourcePos ww4_seOk ww5_seOl ww6_seOm ->
+                  case Text.Parsec.Error.$wmergeError
+                         ww4_seOk
+                         ww5_seOl
+                         ww6_seOm
+                         ww2_abY3
+                         ww11_seOp
+                         ww12_seOq
+                         ww13_seOr
+                         (ghc-prim-0.5.0.0:GHC.Types.[] @ Text.Parsec.Error.Message)
+                  of _ [Occ=Dead] { (# ww15_abYp, ww16_abYq #) ->
+                  Text.Parsec.Error.ParseError ww15_abYp ww16_abYq
+                  }
+                  }
+                  }
+                  }
+                  }))
+            eerr_Xc7d } in
+    (eta1_reZf
+     `cast` (Text.Parsec.Prim.N:ParsecT[0]
+               <[Char]>_R <()>_R <IO>_R <Char>_R
+             :: (ParsecT [Char] () IO Char :: *)
+                ~R#
+                ((forall b_abjg.
+                  State [Char] ()
+                  -> (Char -> State [Char] () -> ParseError -> IO b_abjg)
+                  -> (ParseError -> IO b_abjg)
+                  -> (Char -> State [Char] () -> ParseError -> IO b_abjg)
+                  -> (ParseError -> IO b_abjg)
+                  -> IO b_abjg) :: *)))
+      @ b_abjg
+      eta_B5
+      (\ _ [Occ=Dead]
+         (s2_abYR :: State [Char] ())
+         (err_abYS :: ParseError) ->
+         k_scgI
+           @ b_abjg
+           s2_abYR
+           eta2_B4
+           eta3_B3
+           (\ (x1_abYT :: DataLine)
+              (s3_abYU [OS=OneShot] :: State [Char] ())
+              (err'_abYV [OS=OneShot] :: ParseError) ->
+              eta2_B4
+                x1_abYT s3_abYU (Text.Parsec.Error.mergeError err_abYS err'_abYV))
+           (\ (err'_abYW :: ParseError) ->
+              eta3_B3 (Text.Parsec.Error.mergeError err_abYS err'_abYW)))
+      eta3_B3
+      (\ _ [Occ=Dead]
+         (s2_abYY :: State [Char] ())
+         (err_abYZ :: ParseError) ->
+         k_scgI
+           @ b_abjg
+           s2_abYY
+           eta2_B4
+           eta3_B3
+           (\ (x1_abZ0 :: DataLine)
+              (s3_abZ1 [OS=OneShot] :: State [Char] ())
+              (err'_abZ2 [OS=OneShot] :: ParseError) ->
+              eta4_B2
+                x1_abZ0 s3_abZ1 (Text.Parsec.Error.mergeError err_abYZ err'_abZ2))
+           (\ (err'_abZ3 :: ParseError) ->
+              eta5_B1 (Text.Parsec.Error.mergeError err_abYZ err'_abZ3)))
+      eta5_B1
+
+-- RHS size: {terms: 22, types: 40, coercions: 0}
+Main.main15
+  :: forall b_acaD.
+     State String ()
+     -> (Char -> State String () -> ParseError -> IO b_acaD)
+     -> (ParseError -> IO b_acaD)
+     -> (Char -> State String () -> ParseError -> IO b_acaD)
+     -> (ParseError -> IO b_acaD)
+     -> IO b_acaD
+[GblId,
+ Arity=5,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [20 0 0 0 0] 120 0}]
+Main.main15 =
+  \ (@ b_acaD)
+    (w2_acaE [OS=OneShot] :: State String ())
+    (w3_acaF [OS=OneShot]
+       :: Char -> State String () -> ParseError -> IO b_acaD)
+    _ [Occ=Dead, OS=OneShot]
+    _ [Occ=Dead, OS=OneShot]
+    (w6_acaI [OS=OneShot] :: ParseError -> IO b_acaD) ->
+    case w2_acaE of _ [Occ=Dead] { State ww1_acaL ww2_acaM ww3_acaN ->
+    case ww2_acaM
+    of _ [Occ=Dead]
+    { Text.Parsec.Pos.SourcePos ww5_seOu ww6_seOv ww7_seOw ->
+    Text.Parsec.Char.$wsatisfy
+      @ String
+      @ IO
+      @ ()
+      (Main.$s$fStream[]mtok @ Char)
+      GHC.Unicode.isAlpha
+      @ b_acaD
+      ww1_acaL
+      ww5_seOu
+      ww6_seOv
+      ww7_seOw
+      ww3_acaN
+      w3_acaF
+      w6_acaI
+    }
+    }
+
+-- RHS size: {terms: 3, types: 2, coercions: 0}
+Main.main14 :: [String]
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
+Main.main14 =
+  ghc-prim-0.5.0.0:GHC.Types.:
+    @ String
+    Text.Parsec.Char.letter2
+    (ghc-prim-0.5.0.0:GHC.Types.[] @ String)
+
+-- RHS size: {terms: 14, types: 30, coercions: 6}
+Main.main13
+  :: forall b_acge.
+     State String ()
+     -> (Char -> State String () -> ParseError -> IO b_acge)
+     -> (ParseError -> IO b_acge)
+     -> (Char -> State String () -> ParseError -> IO b_acge)
+     -> (ParseError -> IO b_acge)
+     -> IO b_acge
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,U><L,U><L,C(C1(C1(U)))><L,C(U)>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 0 0 0 0] 80 0}]
+Main.main13 =
+  \ (@ b_acge)
+    (eta_acgf :: State String ())
+    (eta2_acgg :: Char -> State String () -> ParseError -> IO b_acge)
+    (eta3_acgh :: ParseError -> IO b_acge)
+    (eta4_acgi :: Char -> State String () -> ParseError -> IO b_acge)
+    (eta5_acgj :: ParseError -> IO b_acge) ->
+    Text.Parsec.Prim.<?>2
+      @ String
+      @ ()
+      @ IO
+      @ Char
+      (Main.main15
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0] <String>_R <()>_R <IO>_R <Char>_R)
+               :: ((forall b_abjg.
+                    State String ()
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT String () IO Char :: *)))
+      Main.main14
+      @ b_acge
+      eta_acgf
+      eta2_acgg
+      eta3_acgh
+      eta4_acgi
+      eta5_acgj
+
+-- RHS size: {terms: 57, types: 64, coercions: 6}
+Main.main10
+  :: forall b1_Xc2O.
+     State [Char] ()
+     -> (DataLine -> State [Char] () -> ParseError -> IO b1_Xc2O)
+     -> (ParseError -> IO b1_Xc2O)
+     -> (DataLine -> State [Char] () -> ParseError -> IO b1_Xc2O)
+     -> (ParseError -> IO b1_Xc2O)
+     -> IO b1_Xc2O
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 60 60 60] 630 0}]
+Main.main10 =
+  \ (@ b1_Xc2O)
+    (s1_Xc2Q :: State [Char] ())
+    (cok_Xc2S
+       :: DataLine -> State [Char] () -> ParseError -> IO b1_Xc2O)
+    (cerr_Xc2U :: ParseError -> IO b1_Xc2O)
+    (eok_Xc2W
+       :: DataLine -> State [Char] () -> ParseError -> IO b1_Xc2O)
+    (eerr_Xc2Y :: ParseError -> IO b1_Xc2O) ->
+    Text.Parsec.Combinator.$wmany1
+      @ String
+      @ IO
+      @ Char
+      @ ()
+      @ Char
+      (Main.main13
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0] <String>_R <()>_R <IO>_R <Char>_R)
+               :: ((forall b_abjg.
+                    State String ()
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> (Char -> State String () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT String () IO Char :: *)))
+      @ b1_Xc2O
+      s1_Xc2Q
+      (\ (x_XbCj :: [Char])
+         (s2_abYR [OS=OneShot] :: State [Char] ())
+         (err_abYS [OS=OneShot] :: ParseError) ->
+         Main.main12
+           (Main.main_f x_XbCj)
+           @ b1_Xc2O
+           s2_abYR
+           cok_Xc2S
+           cerr_Xc2U
+           (\ (x1_abYT :: DataLine)
+              (s3_abYU [OS=OneShot] :: State [Char] ())
+              (err'_abYV [OS=OneShot] :: ParseError) ->
+              cok_Xc2S
+                x1_abYT s3_abYU (Text.Parsec.Error.mergeError err_abYS err'_abYV))
+           (\ (err'_abYW :: ParseError) ->
+              cerr_Xc2U (Text.Parsec.Error.mergeError err_abYS err'_abYW)))
+      cerr_Xc2U
+      (\ (x_XbCj :: [Char])
+         (s2_abYY [OS=OneShot] :: State [Char] ())
+         (err_abYZ [OS=OneShot] :: ParseError) ->
+         Main.main12
+           (Main.main_f x_XbCj)
+           @ b1_Xc2O
+           s2_abYY
+           cok_Xc2S
+           cerr_Xc2U
+           (\ (x1_abZ0 :: DataLine)
+              (s3_abZ1 [OS=OneShot] :: State [Char] ())
+              (err'_abZ2 [OS=OneShot] :: ParseError) ->
+              eok_Xc2W
+                x1_abZ0 s3_abZ1 (Text.Parsec.Error.mergeError err_abYZ err'_abZ2))
+           (\ (err'_abZ3 :: ParseError) ->
+              eerr_Xc2Y (Text.Parsec.Error.mergeError err_abYZ err'_abZ3)))
+      eerr_Xc2Y
+
+-- RHS size: {terms: 54, types: 61, coercions: 0}
+Main.main9
+  :: forall b1_abyn.
+     State [Char] ()
+     -> (DataLine -> State [Char] () -> ParseError -> IO b1_abyn)
+     -> (ParseError -> IO b1_abyn)
+     -> (DataLine -> State [Char] () -> ParseError -> IO b1_abyn)
+     -> (ParseError -> IO b1_abyn)
+     -> IO b1_abyn
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U(U,U(U,U,U),U)><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,C(U)>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 60 60 60] 580 0}]
+Main.main9 =
+  \ (@ b1_abyn)
+    (eta_abyo :: State [Char] ())
+    (eta2_abyp
+       :: DataLine -> State [Char] () -> ParseError -> IO b1_abyn)
+    (eta3_abyq :: ParseError -> IO b1_abyn)
+    (eta4_abyr
+       :: DataLine -> State [Char] () -> ParseError -> IO b1_abyn)
+    (eta5_abys :: ParseError -> IO b1_abyn) ->
+    Text.Parsec.Char.string1
+      @ String
+      @ IO
+      @ ()
+      (Main.$s$fStream[]mtok @ Char)
+      Main.main16
+      @ b1_abyn
+      eta_abyo
+      (\ _ [Occ=Dead]
+         (s2_abYR [OS=OneShot] :: State [Char] ())
+         (err_abYS [OS=OneShot] :: ParseError) ->
+         Main.main10
+           @ b1_abyn
+           s2_abYR
+           eta2_abyp
+           eta3_abyq
+           (\ (x1_abYT :: DataLine)
+              (s3_abYU [OS=OneShot] :: State [Char] ())
+              (err'_abYV [OS=OneShot] :: ParseError) ->
+              eta2_abyp
+                x1_abYT s3_abYU (Text.Parsec.Error.mergeError err_abYS err'_abYV))
+           (\ (err'_abYW :: ParseError) ->
+              eta3_abyq (Text.Parsec.Error.mergeError err_abYS err'_abYW)))
+      eta3_abyq
+      (\ _ [Occ=Dead, OS=OneShot]
+         (s2_abYY [OS=OneShot] :: State [Char] ())
+         (err_abYZ [OS=OneShot] :: ParseError) ->
+         Main.main10
+           @ b1_abyn
+           s2_abYY
+           eta2_abyp
+           eta3_abyq
+           (\ (x1_abZ0 :: DataLine)
+              (s3_abZ1 [OS=OneShot] :: State [Char] ())
+              (err'_abZ2 [OS=OneShot] :: ParseError) ->
+              eta4_abyr
+                x1_abZ0 s3_abZ1 (Text.Parsec.Error.mergeError err_abYZ err'_abZ2))
+           (\ (err'_abZ3 :: ParseError) ->
+              eta5_abys (Text.Parsec.Error.mergeError err_abYZ err'_abZ3)))
+      eta5_abys
+
+-- RHS size: {terms: 1, types: 0, coercions: 7}
+parserDataLine :: Parser DataLine
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U(U,U(U,U,U),U)><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,C(U)>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.main9
+               `cast` (Sym
+                         (Text.Parsec.Prim.N:ParsecT[0]
+                            <[Char]>_R <()>_R <IO>_R <DataLine>_R)
+                       :: ((forall b_abjg.
+                            State [Char] ()
+                            -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> IO b_abjg) :: *)
+                          ~R#
+                          (ParsecT [Char] () IO DataLine :: *))}]
+parserDataLine =
+  Main.main9
+  `cast` (Sym
+            (Text.Parsec.Prim.N:ParsecT[0]
+               <[Char]>_R <()>_R <IO>_R <DataLine>_R)
+          :: ((forall b_abjg.
+               State [Char] ()
+               -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> IO b_abjg) :: *)
+             ~R#
+             (ParsecT [Char] () IO DataLine :: *))
+
+-- RHS size: {terms: 2, types: 4, coercions: 0}
+Main.main_eta1 :: ParsecT [Char] () IO Char
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=True, Guidance=IF_ARGS [] 20 0}]
+Main.main_eta1 =
+  newline @ String @ IO @ () (Main.$s$fStream[]mtok @ Char)
+
+-- RHS size: {terms: 18, types: 35, coercions: 0}
+Main.main8
+  :: forall b1_acbv.
+     State [Char] ()
+     -> ((Char -> DataLine)
+         -> State [Char] () -> ParseError -> IO b1_acbv)
+     -> (ParseError -> IO b1_acbv)
+     -> ((Char -> DataLine)
+         -> State [Char] () -> ParseError -> IO b1_acbv)
+     -> (ParseError -> IO b1_acbv)
+     -> IO b1_acbv
+[GblId,
+ Arity=5,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 0 60 0] 140 0}]
+Main.main8 =
+  \ (@ b1_acbv)
+    (s1_acbw [OS=OneShot] :: State [Char] ())
+    (cok_acbx [OS=OneShot]
+       :: (Char -> DataLine)
+          -> State [Char] () -> ParseError -> IO b1_acbv)
+    (cerr_acby [OS=OneShot] :: ParseError -> IO b1_acbv)
+    (eok_acbz [OS=OneShot]
+       :: (Char -> DataLine)
+          -> State [Char] () -> ParseError -> IO b1_acbv)
+    (eerr_acbA [OS=OneShot] :: ParseError -> IO b1_acbv) ->
+    Main.main9
+      @ b1_acbv
+      s1_acbw
+      (\ (x_abyf :: DataLine) -> cok_acbx (\ _ [Occ=Dead] -> x_abyf))
+      cerr_acby
+      (\ (x_abyf :: DataLine) -> eok_acbz (\ _ [Occ=Dead] -> x_abyf))
+      eerr_acbA
+
+-- RHS size: {terms: 14, types: 35, coercions: 8}
+Main.main7
+  :: forall b1_ach1.
+     State [Char] ()
+     -> (DataLine -> State [Char] () -> ParseError -> IO b1_ach1)
+     -> (ParseError -> IO b1_ach1)
+     -> (DataLine -> State [Char] () -> ParseError -> IO b1_ach1)
+     -> (ParseError -> IO b1_ach1)
+     -> IO b1_ach1
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 0 0 0 0] 80 0}]
+Main.main7 =
+  \ (@ b1_ach1)
+    (eta2_ach2 :: State [Char] ())
+    (eta3_ach3
+       :: DataLine -> State [Char] () -> ParseError -> IO b1_ach1)
+    (eta4_ach4 :: ParseError -> IO b1_ach1)
+    (eta5_ach5
+       :: DataLine -> State [Char] () -> ParseError -> IO b1_ach1)
+    (eta6_ach6 :: ParseError -> IO b1_ach1) ->
+    Text.Parsec.Prim.$fAlternativeParsecT2
+      @ [Char]
+      @ ()
+      @ IO
+      @ Char
+      @ DataLine
+      (Main.main8
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0]
+                    <[Char]>_R <()>_R <IO>_R <Char -> DataLine>_R)
+               :: ((forall b_abjg.
+                    State [Char] ()
+                    -> ((Char -> DataLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> ((Char -> DataLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT [Char] () IO (Char -> DataLine) :: *)))
+      Main.main_eta1
+      @ b1_ach1
+      eta2_ach2
+      eta3_ach3
+      eta4_ach4
+      eta5_ach5
+      eta6_ach6
+
+-- RHS size: {terms: 54, types: 58, coercions: 7}
+Main.main5
+  :: forall b1_Xc3p.
+     State [Char] ()
+     -> (() -> State [Char] () -> ParseError -> IO b1_Xc3p)
+     -> (ParseError -> IO b1_Xc3p)
+     -> (() -> State [Char] () -> ParseError -> IO b1_Xc3p)
+     -> (ParseError -> IO b1_Xc3p)
+     -> IO b1_Xc3p
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U(U,U(U,U,U),U)><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,C(U)>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 60 60 60] 580 0}]
+Main.main5 =
+  \ (@ b1_Xc3p)
+    (s1_Xc3r :: State [Char] ())
+    (cok_Xc3t :: () -> State [Char] () -> ParseError -> IO b1_Xc3p)
+    (cerr_Xc3v :: ParseError -> IO b1_Xc3p)
+    (eok_Xc3x :: () -> State [Char] () -> ParseError -> IO b1_Xc3p)
+    (eerr_Xc3z :: ParseError -> IO b1_Xc3p) ->
+    Main.$wmanyLength
+      @ DataLine
+      (Main.main7
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0]
+                    <[Char]>_R <()>_R <IO>_R <DataLine>_R)
+               :: ((forall b_abjg.
+                    State [Char] ()
+                    -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> (DataLine -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT [Char] () IO DataLine :: *)))
+      @ b1_Xc3p
+      s1_Xc3r
+      (\ (x_abYQ :: Int)
+         (s2_abYR [OS=OneShot] :: State [Char] ())
+         (err_abYS [OS=OneShot] :: ParseError) ->
+         Main.main6
+           x_abYQ
+           @ b1_Xc3p
+           s2_abYR
+           cok_Xc3t
+           cerr_Xc3v
+           (\ (x1_abYT :: ())
+              (s3_abYU [OS=OneShot] :: State [Char] ())
+              (err'_abYV [OS=OneShot] :: ParseError) ->
+              cok_Xc3t
+                x1_abYT s3_abYU (Text.Parsec.Error.mergeError err_abYS err'_abYV))
+           (\ (err'_abYW :: ParseError) ->
+              cerr_Xc3v (Text.Parsec.Error.mergeError err_abYS err'_abYW)))
+      cerr_Xc3v
+      (\ (x_abYX :: Int)
+         (s2_abYY [OS=OneShot] :: State [Char] ())
+         (err_abYZ [OS=OneShot] :: ParseError) ->
+         Main.main6
+           x_abYX
+           @ b1_Xc3p
+           s2_abYY
+           cok_Xc3t
+           cerr_Xc3v
+           (\ (x1_abZ0 :: ())
+              (s3_abZ1 [OS=OneShot] :: State [Char] ())
+              (err'_abZ2 [OS=OneShot] :: ParseError) ->
+              eok_Xc3x
+                x1_abZ0 s3_abZ1 (Text.Parsec.Error.mergeError err_abYZ err'_abZ2))
+           (\ (err'_abZ3 :: ParseError) ->
+              eerr_Xc3z (Text.Parsec.Error.mergeError err_abYZ err'_abZ3)))
+
+-- RHS size: {terms: 2, types: 1, coercions: 0}
+Main.main19 :: Char -> HeaderLine
+[GblId,
+ Arity=1,
+ Caf=NoCafRefs,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=1,unsat_ok=True,boring_ok=True)}]
+Main.main19 = \ _ [Occ=Dead] -> Types.HL
+
+-- RHS size: {terms: 20, types: 44, coercions: 0}
+Main.main17
+  :: forall b1_acbv.
+     State [Char] ()
+     -> ((Char -> HeaderLine)
+         -> State [Char] () -> ParseError -> IO b1_acbv)
+     -> (ParseError -> IO b1_acbv)
+     -> ((Char -> HeaderLine)
+         -> State [Char] () -> ParseError -> IO b1_acbv)
+     -> (ParseError -> IO b1_acbv)
+     -> IO b1_acbv
+[GblId,
+ Arity=5,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 0 60 0] 150 0}]
+Main.main17 =
+  \ (@ b1_acbv)
+    (s1_acbw [OS=OneShot] :: State [Char] ())
+    (cok_acbx [OS=OneShot]
+       :: (Char -> HeaderLine)
+          -> State [Char] () -> ParseError -> IO b1_acbv)
+    (cerr_acby [OS=OneShot] :: ParseError -> IO b1_acbv)
+    (eok_acbz [OS=OneShot]
+       :: (Char -> HeaderLine)
+          -> State [Char] () -> ParseError -> IO b1_acbv)
+    (eerr_acbA [OS=OneShot] :: ParseError -> IO b1_acbv) ->
+    let {
+      lvl9_seOB :: State [Char] () -> ParseError -> IO b1_acbv
+      [LclId, Str=DmdType]
+      lvl9_seOB = cok_acbx Main.main19 } in
+    Text.Parsec.Char.string1
+      @ String
+      @ IO
+      @ ()
+      (Main.$s$fStream[]mtok @ Char)
+      Main.main18
+      @ b1_acbv
+      s1_acbw
+      (\ _ [Occ=Dead] -> lvl9_seOB)
+      cerr_acby
+      (\ _ [Occ=Dead, OS=OneShot] -> eok_acbz Main.main19)
+      eerr_acbA
+
+-- RHS size: {terms: 54, types: 63, coercions: 8}
+Main.main4
+  :: forall b1_XbDo.
+     State [Char] ()
+     -> (() -> State [Char] () -> ParseError -> IO b1_XbDo)
+     -> (ParseError -> IO b1_XbDo)
+     -> (() -> State [Char] () -> ParseError -> IO b1_XbDo)
+     -> (ParseError -> IO b1_XbDo)
+     -> IO b1_XbDo
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 60 60 60 60] 580 0}]
+Main.main4 =
+  \ (@ b1_XbDo)
+    (eta_XbDq :: State [Char] ())
+    (eta2_XbDs :: () -> State [Char] () -> ParseError -> IO b1_XbDo)
+    (eta3_XbDu :: ParseError -> IO b1_XbDo)
+    (eta4_XbDw :: () -> State [Char] () -> ParseError -> IO b1_XbDo)
+    (eta5_XbDy :: ParseError -> IO b1_XbDo) ->
+    Text.Parsec.Prim.$fAlternativeParsecT2
+      @ [Char]
+      @ ()
+      @ IO
+      @ Char
+      @ HeaderLine
+      (Main.main17
+       `cast` (Sym
+                 (Text.Parsec.Prim.N:ParsecT[0]
+                    <[Char]>_R <()>_R <IO>_R <Char -> HeaderLine>_R)
+               :: ((forall b_abjg.
+                    State [Char] ()
+                    -> ((Char -> HeaderLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> ((Char -> HeaderLine)
+                        -> State [Char] () -> ParseError -> IO b_abjg)
+                    -> (ParseError -> IO b_abjg)
+                    -> IO b_abjg) :: *)
+                  ~R#
+                  (ParsecT [Char] () IO (Char -> HeaderLine) :: *)))
+      Main.main_eta1
+      @ b1_XbDo
+      eta_XbDq
+      (\ _ [Occ=Dead]
+         (s2_abYR [OS=OneShot] :: State [Char] ())
+         (err_abYS [OS=OneShot] :: ParseError) ->
+         Main.main5
+           @ b1_XbDo
+           s2_abYR
+           eta2_XbDs
+           eta3_XbDu
+           (\ (x1_abYT :: ())
+              (s3_abYU [OS=OneShot] :: State [Char] ())
+              (err'_abYV [OS=OneShot] :: ParseError) ->
+              eta2_XbDs
+                x1_abYT s3_abYU (Text.Parsec.Error.mergeError err_abYS err'_abYV))
+           (\ (err'_abYW :: ParseError) ->
+              eta3_XbDu (Text.Parsec.Error.mergeError err_abYS err'_abYW)))
+      eta3_XbDu
+      (\ _ [Occ=Dead]
+         (s2_abYY [OS=OneShot] :: State [Char] ())
+         (err_abYZ [OS=OneShot] :: ParseError) ->
+         Main.main5
+           @ b1_XbDo
+           s2_abYY
+           eta2_XbDs
+           eta3_XbDu
+           (\ (x1_abZ0 :: ())
+              (s3_abZ1 [OS=OneShot] :: State [Char] ())
+              (err'_abZ2 [OS=OneShot] :: ParseError) ->
+              eta4_XbDw
+                x1_abZ0 s3_abZ1 (Text.Parsec.Error.mergeError err_abYZ err'_abZ2))
+           (\ (err'_abZ3 :: ParseError) ->
+              eta5_XbDy (Text.Parsec.Error.mergeError err_abYZ err'_abZ3)))
+      eta5_XbDy
+
+-- RHS size: {terms: 1, types: 0, coercions: 7}
+parserFile :: Parser ()
+[GblId,
+ Arity=5,
+ Str=DmdType <L,U><L,C(C1(C1(U)))><L,U><L,C(C1(C1(U)))><L,U>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.main4
+               `cast` (Sym
+                         (Text.Parsec.Prim.N:ParsecT[0] <[Char]>_R <()>_R <IO>_R <()>_R)
+                       :: ((forall b_abjg.
+                            State [Char] ()
+                            -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+                            -> (ParseError -> IO b_abjg)
+                            -> IO b_abjg) :: *)
+                          ~R#
+                          (ParsecT [Char] () IO () :: *))}]
+parserFile =
+  Main.main4
+  `cast` (Sym
+            (Text.Parsec.Prim.N:ParsecT[0] <[Char]>_R <()>_R <IO>_R <()>_R)
+          :: ((forall b_abjg.
+               State [Char] ()
+               -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+               -> (ParseError -> IO b_abjg)
+               -> IO b_abjg) :: *)
+             ~R#
+             (ParsecT [Char] () IO () :: *))
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.main3 :: Text
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 80 0}]
+Main.main3 =
+  text-1.2.2.1:Data.Text.Show.unpackCString# "Got parser error: "#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+Main.main2 :: Text
+[GblId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 80 0}]
+Main.main2 =
+  text-1.2.2.1:Data.Text.Show.unpackCString# "Successfully parsed."#
+
+-- RHS size: {terms: 49, types: 63, coercions: 11}
+Main.main1
+  :: ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+     -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)
+[GblId,
+ Arity=1,
+ Str=DmdType <S,U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0] 360 0}]
+Main.main1 =
+  \ (s_acHW [OS=OneShot]
+       :: ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld) ->
+    case GHC.IO.Handle.FD.openFile1
+           exampleFile GHC.IO.IOMode.ReadMode s_acHW
+    of _ [Occ=Dead] { (# ipv_acln, ipv1_aclo #) ->
+    case GHC.IO.Handle.Text.hGetContents1 ipv1_aclo ipv_acln
+    of _ [Occ=Dead] { (# ipv2_acHZ, ipv3_acI0 #) ->
+    case ((Text.Parsec.Prim.runPT
+             @ String
+             @ IO
+             @ Char
+             @ ()
+             @ ()
+             (Main.$s$fStream[]mtok @ Char)
+             (Main.main4
+              `cast` (Sym
+                        (Text.Parsec.Prim.N:ParsecT[0] <[Char]>_R <()>_R <IO>_R <()>_R)
+                      :: ((forall b_abjg.
+                           State [Char] ()
+                           -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+                           -> (ParseError -> IO b_abjg)
+                           -> (() -> State [Char] () -> ParseError -> IO b_abjg)
+                           -> (ParseError -> IO b_abjg)
+                           -> IO b_abjg) :: *)
+                         ~R#
+                         (ParsecT [Char] () IO () :: *)))
+             ghc-prim-0.5.0.0:GHC.Tuple.()
+             exampleFile
+             ipv3_acI0)
+          `cast` (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <Either ParseError ()>_R
+                  :: (IO (Either ParseError ()) :: *)
+                     ~R#
+                     ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+                       -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld,
+                             Either ParseError () #)) :: *)))
+           ipv2_acHZ
+    of _ [Occ=Dead] { (# ipv4_XcNu, ipv5_XcNw #) ->
+    case ipv5_XcNw of _ [Occ=Dead] {
+      Left parserErr_a3Wo ->
+        case text-1.2.2.1:Data.Text.IO.appendFile2
+               stdout
+               (text-1.2.2.1:Data.Text.append
+                  Main.main3
+                  (tshow
+                     @ ParseError Text.Parsec.Error.$fShowParseError parserErr_a3Wo))
+               ipv4_XcNu
+        of _ [Occ=Dead] { (# ipv6_abQj, ipv7_abQk #) ->
+        GHC.IO.Handle.Text.$whPutChar stdout '\n'# ipv6_abQj
+        };
+      Right ds_dazv ->
+        case text-1.2.2.1:Data.Text.IO.appendFile2
+               stdout Main.main2 ipv4_XcNu
+        of _ [Occ=Dead] { (# ipv6_abQj, ipv7_abQk #) ->
+        GHC.IO.Handle.Text.$whPutChar stdout '\n'# ipv6_abQj
+        }
+    }
+    }
+    }
+    }
+
+-- RHS size: {terms: 1, types: 0, coercions: 3}
+smartFileParser1 :: IO ()
+[GblId,
+ Arity=1,
+ Str=DmdType <S,U>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.main1
+               `cast` (Sym (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <()>_R)
+                       :: ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+                            -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)) :: *)
+                          ~R#
+                          (IO () :: *))}]
+smartFileParser1 =
+  Main.main1
+  `cast` (Sym (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <()>_R)
+          :: ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+               -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)) :: *)
+             ~R#
+             (IO () :: *))
+
+-- RHS size: {terms: 1, types: 0, coercions: 3}
+main :: IO ()
+[GblId,
+ Arity=1,
+ Str=DmdType <S,U>,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.main1
+               `cast` (Sym (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <()>_R)
+                       :: ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+                            -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)) :: *)
+                          ~R#
+                          (IO () :: *))}]
+main =
+  Main.main1
+  `cast` (Sym (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <()>_R)
+          :: ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+               -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)) :: *)
+             ~R#
+             (IO () :: *))
+
+-- RHS size: {terms: 2, types: 1, coercions: 3}
+Main.main20
+  :: ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+     -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)
+[GblId,
+ Arity=1,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 20 60}]
+Main.main20 =
+  GHC.TopHandler.runMainIO1
+    @ ()
+    (Main.main1
+     `cast` (Sym (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <()>_R)
+             :: ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+                  -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)) :: *)
+                ~R#
+                (IO () :: *)))
+
+-- RHS size: {terms: 1, types: 0, coercions: 3}
+:Main.main :: IO ()
+[GblId,
+ Arity=1,
+ Str=DmdType,
+ Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)
+         Tmpl= Main.main20
+               `cast` (Sym (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <()>_R)
+                       :: ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+                            -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)) :: *)
+                          ~R#
+                          (IO () :: *))}]
+:Main.main =
+  Main.main20
+  `cast` (Sym (ghc-prim-0.5.0.0:GHC.Types.N:IO[0] <()>_R)
+          :: ((ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld
+               -> (# ghc-prim-0.5.0.0:GHC.Prim.State# RealWorld, () #)) :: *)
+             ~R#
+             (IO () :: *))
+
+
+------ Local rules for imported ids --------
+"SPEC/Main $fStream[]mtok_$cp1Stream @ IO _" [ALWAYS]
+    forall (@ tok_abQP) ($dMonad_sbQS :: Monad IO).
+      Text.Parsec.Prim.$fStream[]mtok_$cp1Stream @ IO
+                                                 @ tok_abQP
+                                                 $dMonad_sbQS
+      = Main.$s$fStream[]mtok_$s$fStream[]mtok_$cp1Stream @ tok_abQP
+"SPEC/Main $fStream[]mtok_$cuncons @ IO _" [ALWAYS]
+    forall (@ tok_abQE) ($dMonad_sbQU :: Monad IO).
+      Text.Parsec.Prim.$fStream[]mtok_$cuncons @ IO
+                                               @ tok_abQE
+                                               $dMonad_sbQU
+      = Main.$s$fStream[]mtok_$s$fStream[]mtok_$cuncons @ tok_abQE
+"SPEC/Main $fStream[]mtok @ IO _" [ALWAYS]
+    forall (@ tok_aayb) ($dMonad_sbQC :: Monad IO).
+      Text.Parsec.Prim.$fStream[]mtok @ IO @ tok_aayb $dMonad_sbQC
+      = Main.$s$fStream[]mtok @ tok_aayb
+
